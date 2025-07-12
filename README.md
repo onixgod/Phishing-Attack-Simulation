@@ -271,6 +271,37 @@ sudo apt install unzip -y
      *Figure 30: Modified File*  
      <img width="1109" height="606" alt="Screenshot 2025-07-11 011546" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
 
+4. **Run Gophish Framework Service**:
+   - To run the framework, type the following command in the terminal:
+     ```bash
+     sudo ./gophish
+     ```
+     *Figure 31: Command*  
+     <img width="1122" height="126" alt="Screenshot 2025-07-11 011629" src="https://github.com/user-attachments/assets/a29c36bd-224b-4eef-babd-c6fc0ad34c7d" />
+     *Figure 32: Gophish Running*  
+     <img width="1115" height="776" alt="Screenshot 2025-07-11 011644" src="https://github.com/user-attachments/assets/62547ab2-c15d-4e84-827c-c37f0f37e0ef" />
+
+5. **Gophish Initial Credentials**:
+   - After you start the framework, you will be given the initial credentials to access the Gophish dashboard. At first login, you will need to set up your password.
+   *Figure 33: Gophish Initial Credentials*  
+   <img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
+
+### Step 4.2: Gophish Configuration
+
+1. **Access Gophish web interface on port 3333**
+   - Open a browser on your host machine and access:
+   `https://<SERVER_PUBLIC_IP>:3333>`
+   *Figure 34: Navigate to Folder*  
+
+2.	Change default credentials immediately
+
+3.	Configure global settings: 
+o	Admin server binding
+o	Phishing server binding
+o	Database configuration
+o	Security settings
+
+4.	Test basic functionality with sample campaign
 
 
 
