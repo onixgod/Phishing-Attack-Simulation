@@ -122,7 +122,7 @@ Kamatera was selected as the cloud provider due to its generous $100 free credit
 
 3. **Check server status**:
    * Navigate to *Server List* and select your newly created server. <br> *Figure 6: Server Status Dashboard* <br> <img width="1681" height="508" alt="Screenshot 2025-07-12 121141" src="https://github.com/user-attachments/assets/4c5e5e85-ee58-4911-9707-b83573247cb5" /> <br> *Figure 7: Server Details* <br> <img width="1408" height="686" alt="Screenshot 2025-07-12 121649" src="https://github.com/user-attachments/assets/a4b612c7-95d0-4658-a36c-31a831fc90df" />
-   * From your local host, ping the public IP to confirm connectivity `ping <PUBLIC IP SERVER>`. <br> *Figure 8: Ping Test Output* <br> <img width="1109" height="345" alt="Screenshot 2025-07-11 001820" src="https://github.com/user-attachments/assets/431390e7-5cd7-462e-956d-f4935da3c001" />
+   * From your local host, ping the public IP to confirm connectivity `ping <SERVER_PUBLIC_IP>`. <br> *Figure 8: Ping Test Output* <br> <img width="1109" height="345" alt="Screenshot 2025-07-11 001820" src="https://github.com/user-attachments/assets/431390e7-5cd7-462e-956d-f4935da3c001" />
 
 4. **Configure Kamatera firewall**:
    * Navigate to *Firewall* under server settings.
@@ -130,18 +130,31 @@ Kamatera was selected as the cloud provider due to its generous $100 free credit
    * Use a public IP checker tool to identify your IP. <br> *Figure 12: IP Lookup Tool Example* <br> <img width="1467" height="563" alt="image" src="https://github.com/user-attachments/assets/6c275c50-32b9-4e64-bea4-f2eb03510ebb" />
 
 5. **SSH into the Ubuntu server**:
-   * On your local terminal: `ssh root@<YOUR_PUBLIC_IP>`
-   * **Figure 9: SSH Connection Terminal Output**
-   * Update packages: `apt update && apt upgrade -y`
-   * **Figure 10: System Update Output**
-   * Install unzip: `sudo apt install unzip -y`
-   * **Figure 11: Unzip Installation Output**
+   * On your local terminal: `ssh root@<SERVER_PUBLIC_IP>` <br> *Figure 13: SSH Connection Terminal Output* <br>  <img width="1107" height="216" alt="Screenshot 2025-07-11 005850" src="https://github.com/user-attachments/assets/128d5092-16a3-4f06-a424-f6559f604d37" /> <br> *Figure 14: SSH Connection Stablished* <br> <img width="1108" height="769" alt="Screenshot 2025-07-11 005956" src="https://github.com/user-attachments/assets/d38d2638-62bb-44b7-ae6f-29d08a443405" />
+   * Update packages: `apt update && apt upgrade -y` <br> *Figure 15: System Command* <br> <img width="1111" height="124" alt="Screenshot 2025-07-11 010048" src="https://github.com/user-attachments/assets/32d55335-998c-4a6e-9d3a-2242a9936c83" /> <br> *Figure 16: System Update Output* <br> <img width="1117" height="475" alt="Screenshot 2025-07-11 010122" src="https://github.com/user-attachments/assets/20372622-ad74-49ce-8723-c47e36fe3c4b" />
+   * Install unzip: `sudo apt install unzip -y` <br> *Figure 16: Unzip Installation Command* <br> <img width="1108" height="126" alt="Screenshot 2025-07-11 010304" src="https://github.com/user-attachments/assets/cee61116-d4b2-4c9f-aea0-fd283fc13a7d" /> <br> *Figure 17: Unzip Installation Output* <br> <img width="1112" height="400" alt="Screenshot 2025-07-11 010318" src="https://github.com/user-attachments/assets/ddd59499-49fa-4662-ab45-c51303ad86fe" />
 
-6. **Download Gophish**:
-   * Go to https://getgophish.com and download v0.12.1.
-   * Or use: `wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip`
-   * **Figure 12: Gophish Download Command**
+## Phase 4: Gophish Installation and Configuration
 
-[Note: The remaining phases (Poste.io setup, Gophish installation, Target VMs, Campaign Development, etc.) will follow a similar structured layout, with clear sections, steps, code blocks, and labeled diagrams. Each figure will be referenced accordingly.]
+### Step 4.1: Gophish Installation
 
-Would you like me to continue formatting and refining the remaining sections in this structured format?
+1. **Download Gophish**:
+   * Go to https://getgophish.com and download v0.12.1. <br> *Figure 18: Gophish Website* <br> <img width="1671" height="326" alt="Screenshot 2025-07-11 010507" src="https://github.com/user-attachments/assets/05fca0e6-9f10-492b-b2cb-9932f74e3c8c" />
+   * Click on download and copy the package link `https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip`. <br> *Figure 19: Gophish Package Link* <br> <img width="934" height="297" alt="Screenshot 2025-07-11 010704" src="https://github.com/user-attachments/assets/29584779-e0de-457c-8687-2539a2f5f5cd" />
+   * Go to the terminal and use: `wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip` <br> *Figure 20: Gophish Download Command* <br> <img width="1117" height="122" alt="Screenshot 2025-07-11 010948" src="https://github.com/user-attachments/assets/2f492aa2-1b3a-4553-ae1b-0a49d9a10f62" /> <br> *Figure 21: Gophish Downloaded* <br> <img width="1107" height="560" alt="Screenshot 2025-07-11 011004" src="https://github.com/user-attachments/assets/1b997808-47ae-47cb-a8e9-efcf44458af3" /> <br> *Figure 22: Gophish File Check* <br> <img width="1107" height="124" alt="Screenshot 2025-07-11 011035" src="https://github.com/user-attachments/assets/c4013ffe-21e3-4ac8-918e-2930257dcd7e" />
+
+2. **Create Gophish folder and unzip Gophish package**:
+  * Let's create a local directory to unzip the Gophish package content `sudo mkdir /opt/gophish`. <br> *Figure 23: Command* <br> <img width="1090" height="133" alt="Screenshot 2025-07-11 011114" src="https://github.com/user-attachments/assets/bcdcb5dc-280a-45ea-a34a-195e97e04985" />
+  * Unzip the Gophish package within the folder `unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish`. <br> *Figure 24: Command* <br> <img width="1108" height="83" alt="Screenshot 2025-07-11 011205" src="https://github.com/user-attachments/assets/8a8dc6c1-ab66-4f11-97b2-614e5db4a868" /> <br> *Figure 24: Folder Content* <br> <img width="1113" height="141" alt="Screenshot 2025-07-11 011244" src="https://github.com/user-attachments/assets/73d3347d-2b7a-453f-a3a6-13f0e6ac8243" />
+3. ** Changing Permissions and Gophish Initial Settings **:
+  * Change Gophish permission and make it executable, first navigate to the Gophish folder `cd /opt/gophish`, then type `sudo chmod +x gophish`. <br> *Figure 25: Naviagte to Folder* <br> <img width="1109" height="100" alt="Screenshot 2025-07-11 011335" src="https://github.com/user-attachments/assets/3029baac-b377-4d5e-959c-dfce65a1069e" />  <br> *Figure 26: Modify Permisions* <br> <img width="1110" height="121" alt="Screenshot 2025-07-11 011415" src="https://github.com/user-attachments/assets/081e35a3-db64-44df-8a48-923435b7f602" />
+  * Now we need to edit `config.json` to modify the initial settings, `sudo nano config. json`. <br> *Figure 26: Modify File* <br> <img width="1118" height="109" alt="Screenshot 2025-07-11 011449" src="https://github.com/user-attachments/assets/7ae41b98-28a0-4473-894e-9a7ea43eeee5" />
+  * Navigate to `"listen_url": "127.0.0.0:3333"` and change it to `"listen_url": "0.0.0.0:3333"`. We need to perform this change to allow access from external machines. <br> *Figure 27: Modified File* <br> <img width="1109" height="606" alt="Screenshot 2025-07-11 011546" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
+
+
+
+
+
+
+
+
