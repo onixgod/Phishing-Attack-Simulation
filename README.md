@@ -283,25 +283,39 @@ sudo apt install unzip -y
 
 5. **Gophish Initial Credentials**:
    - After you start the framework, you will be given the initial credentials to access the Gophish dashboard. At first login, you will need to set up your password.
-   *Figure 33: Gophish Initial Credentials*  
-   <img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
+     *Figure 33: Gophish Initial Credentials*
+     <img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
 
 ### Step 4.2: Gophish Configuration
 
 1. **Access Gophish web interface on port 3333**
    - Open a browser on your host machine and access:
-   `https://<SERVER_PUBLIC_IP>:3333>`
-   *Figure 34: Navigate to Folder*  
+     `https://<SERVER_PUBLIC_IP>:3333>`
+     *Figure 34: Navigate to Folder*
+     <img width="1512" height="711" alt="Screenshot 2025-07-11 012038" src="https://github.com/user-attachments/assets/cfcc9f3f-d29e-43cc-bf45-aacc9a9ae034" />
+   
+2.	**Change default credentials immediately**
+   - Type the temporal credentials given during the start of the framework.
+     *Figure 35: Initial Credentials*
+     <img width="529" height="278" alt="Screenshot 2025-07-11 012148" src="https://github.com/user-attachments/assets/d7e53527-3526-4d2e-bb77-eb6a48b9acd4" />
+     *Figure 36: Change Default Password*
+     <img width="634" height="460" alt="Screenshot 2025-07-11 012214" src="https://github.com/user-attachments/assets/12c205ff-8280-4657-8bb6-165515015637" />
+     *Figure 37: Gophish Dashboard*
+     <img width="1493" height="741" alt="Screenshot 2025-07-11 012241" src="https://github.com/user-attachments/assets/c6125d9b-a574-4441-a5cd-e69096eb345b" />
 
-2.	Change default credentials immediately
+     
 
-3.	Configure global settings: 
+3. ** 
+
+     
+
+2.	Configure global settings: 
 o	Admin server binding
 o	Phishing server binding
 o	Database configuration
 o	Security settings
 
-4.	Test basic functionality with sample campaign
+3.	Test basic functionality with a sample campaign
 
 
 
