@@ -4,6 +4,11 @@
 
 This comprehensive lab guide demonstrates how to simulate a **real-world phishing attack** in a safe and isolated environment. The objective is to understand phishing tactics, learn how malicious actors operate, and develop skills for detecting and preventing such attacks using **Gophish** and **Poste.io**.
 
+## Acknowledgments
+
+Special thanks to **@Sandra (With.Sandra's YouTube Channel)** for the inspiration and guidance that helped shape this project.  
+Additional gratitude to **hailbytes.com** for their advanced tutorials, which enabled the transition from an introductory lab to a **live email testing environment**.
+
 ## Learning Goals
 
 - Design and execute realistic phishing campaigns
