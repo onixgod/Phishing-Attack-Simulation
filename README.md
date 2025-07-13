@@ -301,6 +301,37 @@ docker run \
 For more advanced configuration, refer to the official guide:  
 [https://poste.io/doc/getting-started](https://poste.io/doc/getting-started)
 
+Also, note that Poste.io opens the following ports:
+
+*Figure 25: Poste.io Ports* <br>
+<img width="807" height="438" alt="Screenshot 2025-07-11 130300" src="https://github.com/user-attachments/assets/766e6db2-53de-4dd1-a3f6-d872f92e9e75" />
+
+#### 3. Test Poste.io
+
+On the top righ corner click on the mail icon.
+*Figure 26: Accesing Web Mail* <br>
+<img width="247" height="47" alt="Screenshot 2025-07-11 130353" src="https://github.com/user-attachments/assets/d355ce41-db71-4cad-b5d9-7c97c9d1808e" />
+
+Compose and email.
+*Figure 27: Web Mail Interface* <br>
+<img width="1474" height="651" alt="Screenshot 2025-07-11 130707" src="https://github.com/user-attachments/assets/19665fe0-1576-481b-9773-2c9e472f65cc" />
+
+Open on a browser tab MailTemp and get a disposable email address.
+*Figure 28: TempMail Website <br>
+<img width="1572" height="921" alt="Screenshot 2025-07-11 130809" src="https://github.com/user-attachments/assets/a8e4ec95-339d-4e33-9c4c-de6ed5327571" />
+
+Send an email to the disposable address.
+*Figure 29: Sending email <br>
+<img width="1191" height="635" alt="Screenshot 2025-07-11 130754" src="https://github.com/user-attachments/assets/dba79eaf-45a2-40a0-b293-c1375d014f25" />
+
+Check the inbox of the disposable email.
+*Figure 30: Inbox <br>
+<img width="1572" height="925" alt="Screenshot 2025-07-11 130822" src="https://github.com/user-attachments/assets/102223c1-d709-4fc7-a1f2-c0e363e75fde" />
+
+Now we can confirm that our mail server is working correctly and delivering emails with our fake domain (spoof).
+*Figure 31: Email with fake spoof domain <br>
+<img width="829" height="385" alt="Screenshot 2025-07-11 130926" src="https://github.com/user-attachments/assets/aa680ff7-5e71-4e25-955d-b8fe022578f7" />
+
 ---
 
 #### 3. Verify Installation and Access the Web Interface
@@ -323,7 +354,7 @@ Fill in the following configuration fields:
 - **Administrator email:** `admin@campaign.com.au`
 - **Password:** A strong password for mailserver access
 
-*Figure 25: Poste.io First-Time Setup Form* <br>
+*Figure 32: Poste.io First-Time Setup Form* <br>
 <img width="1593" height="772" alt="Screenshot 2025-07-11 130037" src="https://github.com/user-attachments/assets/2d6ed2f8-a140-4be8-bfd9-2dfd1096c5f4" />
 
 ---
@@ -337,23 +368,23 @@ Fill in the following configuration fields:
 #### 1. Download Gophish
 
 - Go to [https://getgophish.com](https://getgophish.com) and download version 0.12.1  
-  *Figure 26: Gophish Website*  
+  *Figure 33: Gophish Website*  
   <img width="1671" height="326" alt="Screenshot 2025-07-11 010507" src="https://github.com/user-attachments/assets/05fca0e6-9f10-492b-b2cb-9932f74e3c8c" />
 
 - Copy the download link:  
   `https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip`  
-  *Figure 27: Gophish Package Link*  
+  *Figure 34: Gophish Package Link*  
   <img width="934" height="297" alt="Screenshot 2025-07-11 010704" src="https://github.com/user-attachments/assets/29584779-e0de-457c-8687-2539a2f5f5cd" />
 
 - Download the package using `wget`:  
   ```bash
   wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
   ```
-  *Figure 28: Gophish Download Command*  
+  *Figure 35: Gophish Download Command*  
   <img width="1117" height="122" alt="Screenshot 2025-07-11 010948" src="https://github.com/user-attachments/assets/2f492aa2-1b3a-4553-ae1b-0a49d9a10f62" />  
-  *Figure 29: Gophish Downloaded*  
+  *Figure 36: Gophish Downloaded*  
   <img width="1107" height="560" alt="Screenshot 2025-07-11 011004" src="https://github.com/user-attachments/assets/1b997808-47ae-47cb-a8e9-efcf44458af3" />  
-  *Figure 30: Gophish File Check*  
+  *Figure 37: Gophish File Check*  
   <img width="1107" height="124" alt="Screenshot 2025-07-11 011035" src="https://github.com/user-attachments/assets/c4013ffe-21e3-4ac8-918e-2930257dcd7e" />
 
 #### 2. Create Gophish Folder and Unzip
@@ -362,16 +393,16 @@ Fill in the following configuration fields:
   ```bash
   sudo mkdir /opt/gophish
   ```
-  *Figure 31: Create Folder*  
+  *Figure 38: Create Folder*  
   <img width="1090" height="133" alt="Screenshot 2025-07-11 011114" src="https://github.com/user-attachments/assets/bcdcb5dc-280a-45ea-a34a-195e97e04985" />
 
 - Unzip the downloaded file:
   ```bash
   unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
   ```
-  *Figure 32: Unzip Command*  
+  *Figure 39: Unzip Command*  
   <img width="1108" height="83" alt="Screenshot 2025-07-11 011205" src="https://github.com/user-attachments/assets/8a8dc6c1-ab66-4f11-97b2-614e5db4a868" />  
-  *Figure 33: Folder Content*  
+  *Figure 40: Folder Content*  
   <img width="1113" height="141" alt="Screenshot 2025-07-11 011244" src="https://github.com/user-attachments/assets/73d3347d-2b7a-453f-a3a6-13f0e6ac8243" />
 
 #### 3. Change Permissions and Configure Gophish
@@ -381,23 +412,23 @@ Fill in the following configuration fields:
   cd /opt/gophish
   sudo chmod +x gophish
   ```
-  *Figure 34: Navigate to Folder*  
+  *Figure 41: Navigate to Folder*  
   <img width="1109" height="100" alt="Screenshot 2025-07-11 011335" src="https://github.com/user-attachments/assets/3029baac-b377-4d5e-959c-dfce65a1069e" />  
-  *Figure 35: Modify Permissions*  
+  *Figure 42: Modify Permissions*  
   <img width="1110" height="121" alt="Screenshot 2025-07-11 011415" src="https://github.com/user-attachments/assets/081e35a3-db64-44df-8a48-923435b7f602" />
 
 - Edit the `config.json` file:
   ```bash
   sudo nano config.json
   ```
-  *Figure 36: Modify File*  
+  *Figure 43: Modify File*  
   <img width="1118" height="109" alt="Screenshot 2025-07-11 011449" src="https://github.com/user-attachments/assets/7ae41b98-28a0-4473-894e-9a7ea43eeee5" />
 
 - Change the line:
   `"listen_url": "127.0.0.0:3333"`  
   to  
   `"listen_url": "0.0.0.0:3333"`  
-  *Figure 37: Modified File*  
+  *Figure 44: Modified File*  
   <img width="1109" height="606" alt="Screenshot 2025-07-11 011546" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
 
 #### 4. Run Gophish Framework
@@ -407,16 +438,16 @@ Start the Gophish service:
 sudo ./gophish
 ```
 
-*Figure 38: Run Gophish*  
+*Figure 45: Run Gophish*  
 <img width="1122" height="126" alt="Screenshot 2025-07-11 011629" src="https://github.com/user-attachments/assets/a29c36bd-224b-4eef-babd-c6fc0ad34c7d" />  
-*Figure 39: Gophish Running*  
+*Figure 46: Gophish Running*  
 <img width="1115" height="776" alt="Screenshot 2025-07-11 011644" src="https://github.com/user-attachments/assets/62547ab2-c15d-4e84-827c-c37f0f37e0ef" />
 
 #### 5. Gophish Initial Credentials
 
 - The initial credentials are displayed in the terminal on the first run. You'll be prompted to set a new password.
 
-*Figure 40: Gophish Initial Credentials*  
+*Figure 47: Gophish Initial Credentials*  
 <img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
 
 ---
@@ -428,7 +459,7 @@ sudo ./gophish
 - Open a browser and visit:  
   `https://<SERVER_PUBLIC_IP>:3333`
 
-*Figure 41: Access Gophish Web Interface*  
+*Figure 48: Access Gophish Web Interface*  
 <img width="1512" height="711" alt="Screenshot 2025-07-11 012038" src="https://github.com/user-attachments/assets/cfcc9f3f-d29e-43cc-bf45-aacc9a9ae034" />
 
 #### 2. Change Default Credentials
@@ -436,30 +467,30 @@ sudo ./gophish
 - Log in using the temporary credentials shown earlier.
 - You will be prompted to change the default password.
 
-*Figure 42: Initial Credentials Login*  
+*Figure 49: Initial Credentials Login*  
 <img width="529" height="278" alt="Screenshot 2025-07-11 012148" src="https://github.com/user-attachments/assets/d7e53527-3526-4d2e-bb77-eb6a48b9acd4" />  
-*Figure 43: Change Default Password*  
+*Figure 50: Change Default Password*  
 <img width="634" height="460" alt="Screenshot 2025-07-11 012214" src="https://github.com/user-attachments/assets/12c205ff-8280-4657-8bb6-165515015637" />  
-*Figure 44: Gophish Dashboard*  
+*Figure 51: Gophish Dashboard*  
 <img width="1493" height="741" alt="Screenshot 2025-07-11 012241" src="https://github.com/user-attachments/assets/c6125d9b-a574-4441-a5cd-e69096eb345b" />
 
 -----------------------------------------------------------
 
-3. ** 
 
-     
+## Phase 6: Client VMs Deployment
 
-2.	Configure global settings: 
-o	Admin server binding
-o	Phishing server binding
-o	Database configuration
-o	Security settings
+---
 
-3.	Test basic functionality with a sample campaign
+### Step 6.1: Lightweight Linux VM 
 
+For this project, we will deploy four lightweight Linux VM flavours, which will serve the purpose of simulating four clients, accessing disposable emails on the TempMail website. Will will be using Lubuntu, which is a lightweight Linux distribution. I have created a template on my Proxmox Home Lab and cloned it to get four separate VMs. I am not showing this process because I'm hoping you know. If you don't use Proxmpx, you can use any other Hypervisor, such as VirtualBox or VMware.
 
+*Figure 52: Lubuntu Client VMs*  
+<img width="1378" height="732" alt="image" src="https://github.com/user-attachments/assets/6d69e9a8-3c80-4690-80f7-8d48939e3ab3" />
 
 
+
+Phase 7: Campaign Development and Testing
 
 
 
