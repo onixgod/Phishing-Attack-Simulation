@@ -1,308 +1,232 @@
----
-title: "Phishing Attack Simulation Lab"
-description: "A step-by-step phishing lab using Gophish, Poste.io, and Kamatera cloud"
-author: "Your Name"
-date: 2025-07-13
-layout: default
----
-
 # Phishing Attack Simulation Lab with Gophish & Poste.io
 
 ## Overview
 
-This lab simulates a **real-world phishing attack** in a safe and isolated environment. The objective is to understand phishing tactics, how malicious actors operate, and how defenders can detect and prevent such attacks using **Gophish** and **Poste.io**.
-
----
+This comprehensive lab guide demonstrates how to simulate a **real-world phishing attack** in a safe and isolated environment. The objective is to understand phishing tactics, learn how malicious actors operate, and develop skills for detecting and preventing such attacks using **Gophish** and **Poste.io**.
 
 ## Learning Goals
 
-- Design and run realistic phishing campaigns
-- Explore the capabilities of phishing infrastructure (Gophish + Mail server)
+- Design and execute realistic phishing campaigns
+- Explore phishing infrastructure capabilities (Gophish + Mail server)
 - Simulate user interactions with phishing emails and landing pages
-- Improve your incident response and detection skills
-- Analyze results and extract key insights from captured credentials and clicks
-
----
+- Improve incident response and detection skills
+- Analyze campaign results and extract key insights from captured credentials and user interactions
 
 ## Skills Gained
 
-### 🛠Technical Skills
-- Linux server setup and hardening
-- Docker containerization and networking
-- Cloud VM provisioning (Kamatera)
-- Mail server configuration with Poste.io
-- Firewall and network rule management
-
-### Cybersecurity Skills
-- Phishing campaign design
-- Security awareness simulation
-- Threat emulation and red team testing
-- Detection strategy validation
-
-
----
-
-
 ### Technical Skills
-- **Virtualisation Management**: Proxmox VE setup and VM provisioning  
-- **Cloud Infrastructure**: Configuration and deployment using Kamatera  
-- **Linux System Administration**: Hardening and managing Ubuntu servers  
-- **Email Server Administration**: Installing and configuring Poste.io, SMTP setup  
-- **Network Security**: Firewall setup and secure port management  
+- **Linux System Administration**: Ubuntu server setup and hardening
+- **Virtualization Management**: Proxmox VE setup and VM provisioning
+- **Cloud Infrastructure**: Configuration and deployment using Kamatera
+- **Containerization**: Docker setup and container management
+- **Email Server Administration**: Installing and configuring Poste.io with SMTP
+- **Network Security**: Firewall configuration and secure port management
 
 ### Cybersecurity Skills
-- **Phishing Campaign Design**: Crafting convincing emails and attack scenarios  
-- **Security Awareness Testing**: Designing tests and defining evaluation metrics  
-- **Threat Simulation**: Recreating real-world phishing attacks for training purposes  
+- **Phishing Campaign Design**: Crafting convincing emails and attack scenarios
+- **Security Awareness Testing**: Designing tests and defining evaluation metrics
+- **Threat Simulation**: Recreating real-world phishing attacks for training purposes
+- **Red Team Operations**: Understanding attack methodologies and execution
 
----
-
-## Tools Used
+## Tools and Technologies
 
 ### Primary Tools
-- **Gophish** – Open-source phishing simulation framework  
-- **Poste.io** – All-in-one email server with web-based interface  
-- **Proxmox VE** – Virtualisation platform used for lab environment  
-- **Kamatera** – Cloud provider used to host the simulation infrastructure  
+- **Gophish** – Open-source phishing simulation framework
+- **Poste.io** – All-in-one email server with web-based interface
+- **Proxmox VE** – Virtualization platform for lab environment
+- **Kamatera** – Cloud provider for hosting simulation infrastructure
 
 ### Supporting Tools
-- **Ubuntu Server 24.04 LTS** – Base OS for mail and phishing servers  
-- **UFW (Uncomplicated Firewall)** – Host-based firewall tool  
-- **Postfix** – Mail transfer agent used by Poste.io  
-- **SQLite** – Lightweight database for Gophish campaign data  
+- **Ubuntu Server 24.04 LTS** – Base operating system for mail and phishing servers
+- **UFW (Uncomplicated Firewall)** – Host-based firewall management
+- **Docker** – Container platform for Poste.io deployment
+- **SQLite** – Lightweight database for Gophish campaign data
 
----
+### Target Environment
+- **Lubuntu Desktop** – Lightweight Linux desktop for testing client interactions
+- **TempMail** – A Disposable email service for receiving phishing emails safely
 
-## Target Environment
+## Phase 1: Infrastructure Planning and Preparation
 
-- **Lubuntu Desktop** – Lightweight Linux desktop for testing client interactions  
-- **Disposable Email Clients** – Services like TempMail for receiving phishing emails in a safe, isolated manner
+### 1.1 Network Architecture Design
 
-## Detailed Steps
+Before implementation, you'll need to create a comprehensive diagram to visualise the project architecture and understand data flow between components.
 
-### Phase 1: Infrastructure Planning and Preparation
-
-The first step in this project is to create a comprehensive diagram to guide the deployment process. This planning phase is essential to understand the data flow and system interactions before implementation.
-
-#### Step 1.1: Network Architecture Design
-
-To visualize the project architecture, I used **Draw.io** to create a network diagram. It illustrates how each component — from virtual machines to cloud services — interacts during the phishing simulation setup.
-
-**Diagram Components:**
-
-- **Virtual Machines**: Lubuntu clients hosted in a Proxmox home lab
+**Architecture Components:**
+- **Virtual Machines**: Lubuntu clients hosted in Proxmox home lab
 - **Cloud Services**: Kamatera-hosted Ubuntu server running Gophish and Poste.io
 - **Network Infrastructure**: Routing, firewall rules, and port forwarding
 
 **Figure 1: Lab Architecture Overview**  
-<img width="1442" height="861" alt="Phishing Attack Simulation drawio (5)" src="https://github.com/user-attachments/assets/eea1dd4a-06ea-47aa-88d1-51c87f054894" />
+<img width="1442" height="861" alt="Phishing Attack Simulation Architecture" src="https://github.com/user-attachments/assets/eea1dd4a-06ea-47aa-88d1-51c87f054894" />
 
----
+## Phase 2: Phishing Campaign Workflow
 
-### Phase 2: Phishing Campaign Workflow
-
-The following diagram outlines the end-to-end workflow for executing a phishing campaign using Gophish and Poste.io. It includes the configuration steps and the execution lifecycle—from email creation to result analysis.
+The following diagram outlines the end-to-end workflow for executing a phishing campaign using Gophish and Poste.io, including configuration steps and execution lifecycle.
 
 **Figure 2: Campaign Workflow**  
-<img width="671" height="562" alt="phishing_simulation_workflow drawio (1)" src="https://github.com/user-attachments/assets/b8554c28-d7df-413f-8b34-c92d6ec8a893" />
+<img width="671" height="562" alt="Phishing Simulation Workflow" src="https://github.com/user-attachments/assets/b8554c28-d7df-413f-8b34-c92d6ec8a893" />
 
-#### Workflow Summary
+### Workflow Summary
 
-1. **Initiation**
-   - The manager launches the phishing simulation via the Gophish dashboard (port 3333).
-
-2. **Configuration Phase**
-   - Email templates, landing pages (port 8081), and recipient lists are created.
-   - A sending profile is configured using Poste.io as the internal SMTP server (port 465).
-
-3. **Execution**
-   - The campaign is launched.
-   - Gophish sends phishing emails through Poste.io.
-   - Emails are delivered to TempMail inboxes used by the Lubuntu clients.
-
-4. **User Interaction**
-   - Targets receive the phishing email and interact with the landing page.
-   - Gophish records user actions such as clicks and form submissions.
-
-5. **Analysis**
-   - The campaign results are monitored in the Gophish dashboard to evaluate engagement levels and identify areas for user awareness improvement.
+1. **Initiation**: Manager launches the phishing simulation via the Gophish dashboard (port 3333)
+2. **Configuration**: Email templates, landing pages (port 8081), and recipient lists are created; sending profile configured using Poste.io as SMTP server (port 465)
+3. **Execution**: Campaign launches, Gophish sends phishing emails through Poste.io to TempMail inboxes
+4. **User Interaction**: Targets receive emails and interact with landing pages; Gophish records clicks and form submissions
+5. **Analysis**: Campaign results monitored in the Gophish dashboard to evaluate engagement and identify improvement areas
 
 ## Phase 3: Cloud Infrastructure Setup
 
-### Step 3.1: Kamatera Cloud VM Deployment
+### 3.1 Kamatera Cloud VM Deployment
 
-Kamatera was selected as the cloud provider due to its generous $100 free trial credit, which is sufficient for this project.
+Kamatera offers a generous $100 free trial credit, making it ideal for this project.
 
-#### 1. Create a Kamatera Account
-- Sign up at [Kamatera.com](https://www.kamatera.com/).
-- The free trial provides enough credit to complete the full deployment.
+#### 3.1.1 Create Kamatera Account
+- Sign up at [Kamatera.com](https://www.kamatera.com/)
+- The free trial provides sufficient credit for complete deployment
 
-#### 2. Deploy Ubuntu Server 24.04 LTS
+#### 3.1.2 Deploy Ubuntu Server 24.04 LTS
 
-- Navigate to **My Cloud** and click **Create New Server**.
-- Select the following:
-  - **Zone**: Closest to your region
-  - **Image**: Ubuntu 24.04 LTS
-  - **Server Type**: General Purpose
+1. Navigate to **My Cloud** and click **Create New Server**
+2. Configure the following settings:
+   - **Zone**: Select the closest to your region
+   - **Image**: Ubuntu 24.04 LTS
+   - **Server Type**: General Purpose
 
-**Figure 3: Kamatera Server Deployment Page**  
-<img width="1712" height="1177" alt="Screenshot 2025-07-11 000422" src="https://github.com/user-attachments/assets/268fde08-75a1-49a1-9736-7004a47ae33a" />
+**Figure 3: Kamatera Server Deployment**  
+<img width="1712" height="1177" alt="Kamatera Server Configuration" src="https://github.com/user-attachments/assets/268fde08-75a1-49a1-9736-7004a47ae33a" />
 
-- Recommended specs:
-  - 2 vCPUs
-  - 4 GB RAM
-  - 50 GB SSD
-  - Public and private networking enabled
+3. Set recommended specifications:
+   - **CPU**: 2 vCPUs
+   - **RAM**: 4 GB
+   - **Storage**: 50 GB SSD
+   - **Networking**: Public and private networking enabled
 
 **Figure 4: Server Configuration Options**  
-<img width="1265" height="933" alt="Screenshot 2025-07-12 115541" src="https://github.com/user-attachments/assets/23e5b241-269e-4848-8cb6-d5ab0ca2e392" />
+<img width="1265" height="933" alt="Server Specs Configuration" src="https://github.com/user-attachments/assets/23e5b241-269e-4848-8cb6-d5ab0ca2e392" />
 
-- Set a root password
-- Name the instance `MyLab-PhishLab`
-- Estimated cost: ~$20/month
+4. Set server credentials:
+   - Create a strong root password
+   - Name the instance: `MyLab-PhishLab`
+   - Estimated cost: ~$20/month
 
-**Figure 5: Server Name and Password Configuration**  
-<img width="1335" height="826" alt="Screenshot 2025-07-12 120615" src="https://github.com/user-attachments/assets/ba355d0a-6b97-4872-9618-0c1cbb897a9d" />
+**Figure 5: Server Credentials Configuration**  
+<img width="1335" height="826" alt="Server Name and Password" src="https://github.com/user-attachments/assets/ba355d0a-6b97-4872-9618-0c1cbb897a9d" />
 
-#### 3. Check Server Status
+#### 3.1.3 Verify Server Status
 
-- Go to **Server List** and locate your new instance.
+1. Navigate to **Server List** and locate your new instance
 
 **Figure 6: Server Status Dashboard**  
-<img width="1681" height="508" alt="Screenshot 2025-07-12 121141" src="https://github.com/user-attachments/assets/4c5e5e85-ee58-4911-9707-b83573247cb5" />
+<img width="1681" height="508" alt="Server Status" src="https://github.com/user-attachments/assets/4c5e5e85-ee58-4911-9707-b83573247cb5" />
 
 **Figure 7: Server Details**  
-<img width="1408" height="686" alt="Screenshot 2025-07-12 121649" src="https://github.com/user-attachments/assets/a4b612c7-95d0-4658-a36c-31a831fc90df" />
+<img width="1408" height="686" alt="Server Information" src="https://github.com/user-attachments/assets/a4b612c7-95d0-4658-a36c-31a831fc90df" />
 
-- From your local terminal, test connectivity using:
-
+2. Test connectivity from your local terminal:
 ```bash
 ping <SERVER_PUBLIC_IP>
 ```
 
-**Figure 8: Ping Test Output**  
-<img width="1109" height="345" alt="Screenshot 2025-07-11 001820" src="https://github.com/user-attachments/assets/431390e7-5cd7-462e-956d-f4935da3c001" />
+**Figure 8: Connectivity Test**  
+<img width="1109" height="345" alt="Ping Test Results" src="https://github.com/user-attachments/assets/431390e7-5cd7-462e-956d-f4935da3c001" />
 
-#### 4. Configure Kamatera Firewall
+#### 3.1.4 Configure Kamatera Firewall
 
-- Navigate to **Firewall** under the server’s settings
-- Enable the firewall and add custom rules to allow TCP/UDP from your local IP
+1. Navigate to **Firewall** under server settings
+2. Enable the firewall and add custom rules:
+   - Allow TCP/UDP traffic from your local IP address
+   - Use an IP lookup tool (e.g., whatismyip.com) to identify your public IP
 
-**Figure 9: Firewall Rule Settings**  
-<img width="1440" height="988" alt="image" src="https://github.com/user-attachments/assets/25b7da53-74e9-48d1-b70e-51e1350c8a60" />
+**Figure 9: Firewall Configuration**  
+<img width="1440" height="988" alt="Firewall Rules" src="https://github.com/user-attachments/assets/25b7da53-74e9-48d1-b70e-51e1350c8a60" />
 
-**Figure 10: UDP Rule Settings**  
-<img width="604" height="680" alt="Screenshot 2025-07-11 003513" src="https://github.com/user-attachments/assets/03f02881-70a4-46ce-a973-a7f601814d4d" />
+**Figure 10: UDP Rule Configuration**  
+<img width="604" height="680" alt="UDP Rules" src="https://github.com/user-attachments/assets/03f02881-70a4-46ce-a973-a7f601814d4d" />
 
-**Figure 11: TCP Rule Settings**  
-<img width="599" height="678" alt="Screenshot 2025-07-11 003630" src="https://github.com/user-attachments/assets/b4d1ffd9-c6ec-45bf-b01d-29ff5f230926" />
+**Figure 11: TCP Rule Configuration**  
+<img width="599" height="678" alt="TCP Rules" src="https://github.com/user-attachments/assets/b4d1ffd9-c6ec-45bf-b01d-29ff5f230926" />
 
-- Use an IP lookup tool (e.g., whatismyip.com) to identify your current public IP.
+**Figure 12: IP Address Lookup**  
+<img width="1467" height="563" alt="IP Lookup Tool" src="https://github.com/user-attachments/assets/6c275c50-32b9-4e64-bea4-f2eb03510ebb" />
 
-**Figure 12: IP Lookup Tool Example**  
-<img width="1467" height="563" alt="image" src="https://github.com/user-attachments/assets/6c275c50-32b9-4e64-bea4-f2eb03510ebb" />
+#### 3.1.5 Establish SSH Connection
 
-#### 5. SSH into the Ubuntu Server
-
-From your local machine:
-
+Connect to your Ubuntu server from your local machine:
 ```bash
 ssh root@<SERVER_PUBLIC_IP>
 ```
 
-**Figure 13: SSH Connection Terminal Output**  
-<img width="1107" height="216" alt="Screenshot 2025-07-11 005850" src="https://github.com/user-attachments/assets/128d5092-16a3-4f06-a424-f6559f604d37" />
+**Figure 13: SSH Connection**  
+<img width="1107" height="216" alt="SSH Command" src="https://github.com/user-attachments/assets/128d5092-16a3-4f06-a424-f6559f604d37" />
 
-**Figure 14: SSH Connection Established**  
-<img width="1108" height="769" alt="Screenshot 2025-07-11 005956" src="https://github.com/user-attachments/assets/d38d2638-62bb-44b7-ae6f-29d08a443405" />
+**Figure 14: SSH Session Established**  
+<img width="1108" height="769" alt="SSH Connected" src="https://github.com/user-attachments/assets/d38d2638-62bb-44b7-ae6f-29d08a443405" />
 
-#### 6. Update and Install Required Packages
+#### 3.1.6 System Updates and Package Installation
 
-Run the following commands after login:
-
+1. Update the system:
 ```bash
 apt update && apt upgrade -y
 ```
 
 **Figure 15: System Update Command**  
-<img width="1111" height="124" alt="Screenshot 2025-07-11 010048" src="https://github.com/user-attachments/assets/32d55335-998c-4a6e-9d3a-2242a9936c83" />
+<img width="1111" height="124" alt="Update Command" src="https://github.com/user-attachments/assets/32d55335-998c-4a6e-9d3a-2242a9936c83" />
 
-**Figure 16: System Update Output**  
-<img width="1117" height="475" alt="Screenshot 2025-07-11 010122" src="https://github.com/user-attachments/assets/20372622-ad74-49ce-8723-c47e36fe3c4b" />
+**Figure 16: Update Process**  
+<img width="1117" height="475" alt="Update Output" src="https://github.com/user-attachments/assets/20372622-ad74-49ce-8723-c47e36fe3c4b" />
 
-Install unzip:
-
+2. Install required packages:
 ```bash
 sudo apt install unzip -y
 ```
 
-**Figure 17: Unzip Installation Command**  
-<img width="1108" height="126" alt="Screenshot 2025-07-11 010304" src="https://github.com/user-attachments/assets/cee61116-d4b2-4c9f-aea0-fd283fc13a7d" />
+**Figure 17: Installing Unzip**  
+<img width="1108" height="126" alt="Unzip Installation" src="https://github.com/user-attachments/assets/cee61116-d4b2-4c9f-aea0-fd283fc13a7d" />
 
-**Figure 18: Unzip Installation Output**  
-<img width="1112" height="400" alt="Screenshot 2025-07-11 010318" src="https://github.com/user-attachments/assets/ddd59499-49fa-4662-ab45-c51303ad86fe" />
+**Figure 18: Installation Complete**  
+<img width="1112" height="400" alt="Installation Output" src="https://github.com/user-attachments/assets/ddd59499-49fa-4662-ab45-c51303ad86fe" />
 
 ## Phase 4: Email Infrastructure Setup (Poste.io)
 
-> **Note:**  
-> This mail server setup is designed to send emails to a disposable email environment for **testing and learning purposes only**. It does **not** include the setup of MX records, real domains, TLS, SPF, DKIM, or DMARC. As a result, it **will not deliver to trusted email providers** (e.g., Gmail, Outlook). Do **not** use this setup for malicious purposes.
+> **Important Note:**  
+> This mail server setup is designed for **testing and learning purposes only** in a disposable email environment. It does **not** include MX records, real domains, TLS certificates, SPF, DKIM, or DMARC configuration. Consequently, it **will not deliver to trusted email providers** (Gmail, Outlook, etc.). **Do not use this setup for malicious purposes.**
 
----
+### 4.1 Poste.io Installation
 
-### Step 4.1: Poste.io Installation
+#### 4.1.1 Install Docker Engine
 
-#### 1. Install Docker Engine
-
-Download the Docker installation script:
-
+1. Download the Docker installation script:
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 ```
 
-**Figure 19: Download Docker Script Command** <br>
-<img width="1111" height="159" alt="Screenshot 2025-07-11 114804" src="https://github.com/user-attachments/assets/3d7a8071-d191-4022-83aa-ffe3574ae79a" />
+**Figure 19: Download Docker Script**  
+<img width="1111" height="159" alt="Docker Download" src="https://github.com/user-attachments/assets/3d7a8071-d191-4022-83aa-ffe3574ae79a" />
 
-**Figure 20: Script File in Directory** <br>
-<img width="1121" height="160" alt="Screenshot 2025-07-11 114856" src="https://github.com/user-attachments/assets/bcb2ef6d-5c59-4be3-8629-1d934f18e09e" />
+**Figure 20: Script File Created**  
+<img width="1121" height="160" alt="Script File" src="https://github.com/user-attachments/assets/bcb2ef6d-5c59-4be3-8629-1d934f18e09e" />
 
-*Figure 21: Script File Content Preview* <br>
-<img width="1112" height="623" alt="Screenshot 2025-07-11 114923" src="https://github.com/user-attachments/assets/ecca322e-da7e-4528-8f60-0c1145dc8d21" />
+**Figure 21: Script Content Preview**  
+<img width="1112" height="623" alt="Script Content" src="https://github.com/user-attachments/assets/ecca322e-da7e-4528-8f60-0c1145dc8d21" />
 
-
-Run the script:
-
+2. Execute the installation script:
 ```bash
 sudo sh get-docker.sh
 ```
 
-**Figure 22: Run Installation Script** <br>
-<img width="1113" height="133" alt="Screenshot 2025-07-11 115056" src="https://github.com/user-attachments/assets/6d46e30c-5970-4119-8e99-f3e69b69210a" />
+**Figure 22: Docker Installation**  
+<img width="1113" height="133" alt="Docker Install" src="https://github.com/user-attachments/assets/6d46e30c-5970-4119-8e99-f3e69b69210a" />
 
-
-Verify Docker Engine is working correctly:
-
+3. Verify Docker installation:
 ```bash
 sudo docker run hello-world
 ```
+This command should display a "Hello from Docker" message.
 
-This command should output a "Hello from Docker" message and exit.  
+#### 4.1.2 Deploy Poste.io Container
 
----
-
-#### 2. Download and Run the Poste.io Docker Container
-
-Before executing the command, here's a breakdown of each flag used:
-
-- `--net=host`: Uses host networking (simplifies access).
-- `-e TZ=Europe/Prague`: Set your timezone.
-- `-v /your-data-dir/data:/data`: Mounts your data directory (user accounts, logs, emails).
-- `--name "mailserver"`: Names the Docker container.
-- `-h "mail.example.com"`: Sets your mailserver hostname (replace accordingly).
-- `-t analogic/poste.io`: Specifies the Poste.io image (free version).
-
-> **Note:** Replace `mail.example.com` with your own project-related hostname.
-
-**Final Command:**
+Execute the following Docker command with your specific configuration:
 
 ```bash
 docker run \
@@ -314,450 +238,535 @@ docker run \
     -t analogic/poste.io
 ```
 
-**Figure 23: Poste.io Container Running** <br>
-<img width="1107" height="253" alt="Screenshot 2025-07-11 115240" src="https://github.com/user-attachments/assets/ad39b5f1-55ef-4a62-abf3-8d338d5fda7b" />
+**Command Parameters Explained:**
+- `--net=host`: Uses host networking for simplified access
+- `-e TZ=Europe/Prague`: Sets timezone (adjust as needed)
+- `-v /your-data-dir/data:/data`: Mounts data directory for persistence
+- `--name "mailserver"`: Names the Docker container
+- `-h "mail.example.com"`: Sets mailserver hostname (replace with your domain)
+- `-t analogic/poste.io`: Specifies the Poste.io Docker image
 
-**Figure 24: Poste.io Ready Message** <br>
-<img width="1094" height="482" alt="Screenshot 2025-07-11 125631" src="https://github.com/user-attachments/assets/593dbe5a-1e74-40b7-abf1-04912369279b" />
+**Figure 23: Poste.io Container Running**  
+<img width="1107" height="253" alt="Container Running" src="https://github.com/user-attachments/assets/ad39b5f1-55ef-4a62-abf3-8d338d5fda7b" />
 
-For more advanced configuration, refer to the official guide:  
-[https://poste.io/doc/getting-started](https://poste.io/doc/getting-started)
+**Figure 24: Poste.io Ready**  
+<img width="1094" height="482" alt="Poste.io Ready" src="https://github.com/user-attachments/assets/593dbe5a-1e74-40b7-abf1-04912369279b" />
 
-Also, note that Poste.io opens the following ports:
+**Figure 25: Poste.io Port Configuration**  
+<img width="807" height="438" alt="Port Configuration" src="https://github.com/user-attachments/assets/766e6db2-53de-4dd1-a3f6-d872f92e9e75" />
 
-**Figure 25: Poste.io Ports** <br>
-<img width="807" height="438" alt="Screenshot 2025-07-11 130300" src="https://github.com/user-attachments/assets/766e6db2-53de-4dd1-a3f6-d872f92e9e75" />
+For advanced configuration options, refer to the official documentation: [https://poste.io/doc/getting-started](https://poste.io/doc/getting-started)
 
-#### 3. Test Poste.io
+#### 4.1.3 Test Email Functionality
 
-On the top righ corner click on the mail icon.
-**Figure 26: Accesing Web Mail** <br>
-<img width="247" height="47" alt="Screenshot 2025-07-11 130353" src="https://github.com/user-attachments/assets/d355ce41-db71-4cad-b5d9-7c97c9d1808e" />
+1. Access the webmail interface by clicking the mail icon in the top-right corner
 
-Compose and email.<br>
-**Figure 27: Web Mail Interface** <br>
-<img width="1474" height="651" alt="Screenshot 2025-07-11 130707" src="https://github.com/user-attachments/assets/19665fe0-1576-481b-9773-2c9e472f65cc" />
+**Figure 26: Accessing Webmail**  
+<img width="247" height="47" alt="Webmail Access" src="https://github.com/user-attachments/assets/d355ce41-db71-4cad-b5d9-7c97c9d1808e" />
 
-Open on a browser tab MailTemp and get a disposable email address.,br>
-**Figure 28: TempMail Website** <br>
-<img width="1572" height="921" alt="Screenshot 2025-07-11 130809" src="https://github.com/user-attachments/assets/a8e4ec95-339d-4e33-9c4c-de6ed5327571" />
+**Figure 27: Webmail Interface**  
+<img width="1474" height="651" alt="Webmail Interface" src="https://github.com/user-attachments/assets/19665fe0-1576-481b-9773-2c9e472f65cc" />
 
-Send an email to the disposable address. <br>
-**Figure 29: Sending email** <br>
-<img width="1191" height="635" alt="Screenshot 2025-07-11 130754" src="https://github.com/user-attachments/assets/dba79eaf-45a2-40a0-b293-c1375d014f25" />
+2. Obtain a disposable email address from TempMail
 
-Check the inbox of the disposable email. <br>
-**Figure 30: Inbox** <br>
-<img width="1572" height="925" alt="Screenshot 2025-07-11 130822" src="https://github.com/user-attachments/assets/102223c1-d709-4fc7-a1f2-c0e363e75fde" />
+**Figure 28: TempMail Service**  
+<img width="1572" height="921" alt="TempMail Website" src="https://github.com/user-attachments/assets/a8e4ec95-339d-4e33-9c4c-de6ed5327571" />
 
-Now we can confirm that our mail server is working correctly and delivering emails with our fake domain (spoof). <br>
-**Figure 31: Email with fake spoof domain** <br>
-<img width="829" height="385" alt="Screenshot 2025-07-11 130926" src="https://github.com/user-attachments/assets/aa680ff7-5e71-4e25-955d-b8fe022578f7" />
+3. Send a test email to the disposable address
 
----
+**Figure 29: Sending Test Email**  
+<img width="1191" height="635" alt="Test Email" src="https://github.com/user-attachments/assets/dba79eaf-45a2-40a0-b293-c1375d014f25" />
 
-#### 3. Verify Installation and Access the Web Interface
+4. Verify email delivery in the TempMail inbox
 
-- Open your browser and navigate to:  
-  `https://<SERVER_PUBLIC_IP>`
+**Figure 30: Email Received**  
+<img width="1572" height="925" alt="Email Inbox" src="https://github.com/user-attachments/assets/102223c1-d709-4fc7-a1f2-c0e363e75fde" />
 
-- If the default login page doesn't load, access the install path directly:  
-  `https://<SERVER_PUBLIC_IP>/admin/install/server`
+**Figure 31: Email with Spoofed Domain**  
+<img width="829" height="385" alt="Spoofed Domain Email" src="https://github.com/user-attachments/assets/aa680ff7-5e71-4e25-955d-b8fe022578f7" />
 
----
+This confirms that the mail server is operational and can deliver emails with the configured domain.
 
-### Step 4.2: Poste.io Configuration
+### 4.2 Poste.io Configuration
 
-#### 1. Complete Initial Setup Wizard via Web Interface
+#### 4.2.1 Complete Initial Setup
 
-Fill in the following configuration fields:
+1. Access the web interface at: `https://<SERVER_PUBLIC_IP>`
+2. If the default page doesn't load, navigate directly to: `https://<SERVER_PUBLIC_IP>/admin/install/server`
+3. Complete the setup wizard with the following information:
+   - **Mailserver hostname**: `campaign.com.au`
+   - **Administrator email**: `admin@campaign.com.au`
+   - **Password**: Create a strong administrator password
 
-- **Mailserver hostname:** `campaign.com.au`
-- **Administrator email:** `admin@campaign.com.au`
-- **Password:** A strong password for mailserver access
-
-**Figure 32: Poste.io First-Time Setup Form** <br>
-<img width="1593" height="774" alt="image" src="https://github.com/user-attachments/assets/5a2084c2-df66-42c0-9123-ed339325b6e0" />
-
----
+**Figure 32: Poste.io Setup Form**  
+<img width="1593" height="774" alt="Initial Setup" src="https://github.com/user-attachments/assets/5a2084c2-df66-42c0-9123-ed339325b6e0" />
 
 ## Phase 5: Gophish Installation and Configuration
 
----
+### 5.1 Gophish Installation
 
-### Step 5.1: Gophish Installation
+#### 5.1.1 Download Gophish
 
-#### 1. Download Gophish
+1. Visit [https://getgophish.com](https://getgophish.com) and locate version 0.12.1
 
-- Go to [https://getgophish.com](https://getgophish.com) and download version 0.12.1  
-  **Figure 33: Gophish Website** 
-  <img width="1671" height="326" alt="Screenshot 2025-07-11 010507" src="https://github.com/user-attachments/assets/05fca0e6-9f10-492b-b2cb-9932f74e3c8c" />
+**Figure 33: Gophish Website**  
+<img width="1671" height="326" alt="Gophish Download" src="https://github.com/user-attachments/assets/05fca0e6-9f10-492b-b2cb-9932f74e3c8c" />
 
-- Copy the download link:  
-  `https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip`  
-  *Figure 34: Gophish Package Link*  
-  <img width="934" height="297" alt="Screenshot 2025-07-11 010704" src="https://github.com/user-attachments/assets/29584779-e0de-457c-8687-2539a2f5f5cd" />
+2. Copy the download link for Linux 64-bit:
+   `https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip`
 
-- Download the package using `wget`:  
-  ```bash
-  wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
-  ```
-  **Figure 35: Gophish Download Command**
-  <img width="1117" height="122" alt="Screenshot 2025-07-11 010948" src="https://github.com/user-attachments/assets/2f492aa2-1b3a-4553-ae1b-0a49d9a10f62" />  
-  **Figure 36: Gophish Downloaded**  
-  <img width="1107" height="560" alt="Screenshot 2025-07-11 011004" src="https://github.com/user-attachments/assets/1b997808-47ae-47cb-a8e9-efcf44458af3" />  
-  **Figure 37: Gophish File Check**  
-  <img width="1107" height="124" alt="Screenshot 2025-07-11 011035" src="https://github.com/user-attachments/assets/c4013ffe-21e3-4ac8-918e-2930257dcd7e" />
+**Figure 34: Download Link**  
+<img width="934" height="297" alt="Download Link" src="https://github.com/user-attachments/assets/29584779-e0de-457c-8687-2539a2f5f5cd" />
 
-#### 2. Create Gophish Folder and Unzip
+3. Download using wget:
+```bash
+wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
+```
 
-- Create a directory:
-  ```bash
-  sudo mkdir /opt/gophish
-  ```
-  **Figure 38: Create Folder**  
-  <img width="1090" height="133" alt="Screenshot 2025-07-11 011114" src="https://github.com/user-attachments/assets/bcdcb5dc-280a-45ea-a34a-195e97e04985" />
+**Figure 35: Download Command**  
+<img width="1117" height="122" alt="Download Command" src="https://github.com/user-attachments/assets/2f492aa2-1b3a-4553-ae1b-0a49d9a10f62" />
 
-- Unzip the downloaded file:
-  ```bash
-  unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
-  ```
-  **Figure 39: Unzip Command**  
-  <img width="1108" height="83" alt="Screenshot 2025-07-11 011205" src="https://github.com/user-attachments/assets/8a8dc6c1-ab66-4f11-97b2-614e5db4a868" />  
-  **Figure 40: Folder Content**  
-  <img width="1113" height="141" alt="Screenshot 2025-07-11 011244" src="https://github.com/user-attachments/assets/73d3347d-2b7a-453f-a3a6-13f0e6ac8243" />
+**Figure 36: Download Complete**  
+<img width="1107" height="560" alt="Download Complete" src="https://github.com/user-attachments/assets/1b997808-47ae-47cb-a8e9-efcf44458af3" />
 
-#### 3. Change Permissions and Configure Gophish
+**Figure 37: File Verification**  
+<img width="1107" height="124" alt="File Check" src="https://github.com/user-attachments/assets/c4013ffe-21e3-4ac8-918e-2930257dcd7e" />
 
-- Make the binary executable:
-  ```bash
-  cd /opt/gophish
-  sudo chmod +x gophish
-  ```
-  **Figure 41: Navigate to Folder**  
-  <img width="1109" height="100" alt="Screenshot 2025-07-11 011335" src="https://github.com/user-attachments/assets/3029baac-b377-4d5e-959c-dfce65a1069e" />  
-  *Figure 42: Modify Permissions*  
-  <img width="1110" height="121" alt="Screenshot 2025-07-11 011415" src="https://github.com/user-attachments/assets/081e35a3-db64-44df-8a48-923435b7f602" />
+#### 5.1.2 Installation and Setup
 
-- Edit the `config.json` file:
-  ```bash
-  sudo nano config.json
-  ```
-  **Figure 43: Modify File**  
-  <img width="1118" height="109" alt="Screenshot 2025-07-11 011449" src="https://github.com/user-attachments/assets/7ae41b98-28a0-4473-894e-9a7ea43eeee5" />
+1. Create installation directory:
+```bash
+sudo mkdir /opt/gophish
+```
 
-- Change the line:
-  `"listen_url": "127.0.0.0:3333"`  
-  to  
-  `"listen_url": "0.0.0.0:3333"`  
-  **Figure 44: Modified File**  
-  <img width="1109" height="606" alt="Screenshot 2025-07-11 011546" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
+**Figure 38: Create Directory**  
+<img width="1090" height="133" alt="Create Directory" src="https://github.com/user-attachments/assets/bcdcb5dc-280a-45ea-a34a-195e97e04985" />
 
-#### 4. Run Gophish Framework
+2. Extract the archive:
+```bash
+unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
+```
 
-Start the Gophish service:
+**Figure 39: Extract Files**  
+<img width="1108" height="83" alt="Unzip Command" src="https://github.com/user-attachments/assets/8a8dc6c1-ab66-4f11-97b2-614e5db4a868" />
+
+**Figure 40: Directory Contents**  
+<img width="1113" height="141" alt="Directory Contents" src="https://github.com/user-attachments/assets/73d3347d-2b7a-453f-a3a6-13f0e6ac8243" />
+
+3. Set executable permissions:
+```bash
+cd /opt/gophish
+sudo chmod +x gophish
+```
+
+**Figure 41: Navigate to Directory**  
+<img width="1109" height="100" alt="Navigate Directory" src="https://github.com/user-attachments/assets/3029baac-b377-4d5e-959c-dfce65a1069e" />
+
+**Figure 42: Set Permissions**  
+<img width="1110" height="121" alt="Set Permissions" src="https://github.com/user-attachments/assets/081e35a3-db64-44df-8a48-923435b7f602" />
+
+#### 5.1.3 Configuration
+
+1. Edit the configuration file:
+```bash
+sudo nano config.json
+```
+
+**Figure 43: Edit Configuration**  
+<img width="1118" height="109" alt="Edit Config" src="https://github.com/user-attachments/assets/7ae41b98-28a0-4473-894e-9a7ea43eeee5" />
+
+2. Modify the listen URL:
+   - Change: `"listen_url": "127.0.0.1:3333"`
+   - To: `"listen_url": "0.0.0.0:3333"`
+
+**Figure 44: Configuration File**  
+<img width="1109" height="606" alt="Config File" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
+
+#### 5.1.4 Launch Gophish
+
+1. Start the Gophish service:
 ```bash
 sudo ./gophish
 ```
 
-**Figure 45: Run Gophish**  
-<img width="1122" height="126" alt="Screenshot 2025-07-11 011629" src="https://github.com/user-attachments/assets/a29c36bd-224b-4eef-babd-c6fc0ad34c7d" />  
+**Figure 45: Start Gophish**  
+<img width="1122" height="126" alt="Start Gophish" src="https://github.com/user-attachments/assets/a29c36bd-224b-4eef-babd-c6fc0ad34c7d" />
+
 **Figure 46: Gophish Running**  
-<img width="1115" height="776" alt="Screenshot 2025-07-11 011644" src="https://github.com/user-attachments/assets/62547ab2-c15d-4e84-827c-c37f0f37e0ef" />
+<img width="1115" height="776" alt="Gophish Running" src="https://github.com/user-attachments/assets/62547ab2-c15d-4e84-827c-c37f0f37e0ef" />
 
-#### 5. Gophish Initial Credentials
+2. Note the initial credentials displayed in the terminal
 
-- The initial credentials are displayed in the terminal on the first run. You'll be prompted to set a new password.
+**Figure 47: Initial Credentials**  
+<img width="1115" height="776" alt="Initial Credentials" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
 
-**Figure 47: Gophish Initial Credentials**  
-<img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
+### 5.2 Gophish Configuration
 
----
+#### 5.2.1 Access Web Interface
 
-### Step 5.2: Gophish Configuration
+1. Open a browser and navigate to: `https://<SERVER_PUBLIC_IP>:3333`
 
-#### 1. Access the Web Interface
+**Figure 48: Gophish Web Interface**  
+<img width="1512" height="711" alt="Web Interface" src="https://github.com/user-attachments/assets/cfcc9f3f-d29e-43cc-bf45-aacc9a9ae034" />
 
-- Open a browser and visit:  
-  `https://<SERVER_PUBLIC_IP>:3333`
+#### 5.2.2 Initial Login and Password Change
 
-**Figure 48: Access Gophish Web Interface**  
-<img width="1512" height="711" alt="Screenshot 2025-07-11 012038" src="https://github.com/user-attachments/assets/cfcc9f3f-d29e-43cc-bf45-aacc9a9ae034" />
+1. Log in using the temporary credentials from the terminal
 
-#### 2. Change Default Credentials
+**Figure 49: Login Screen**  
+<img width="529" height="278" alt="Login Screen" src="https://github.com/user-attachments/assets/d7e53527-3526-4d2e-bb77-eb6a48b9acd4" />
 
-- Log in using the temporary credentials shown earlier.
-- You will be prompted to change the default password.
+2. Change the default password when prompted
 
-**Figure 49: Initial Credentials Login**  
-<img width="529" height="278" alt="Screenshot 2025-07-11 012148" src="https://github.com/user-attachments/assets/d7e53527-3526-4d2e-bb77-eb6a48b9acd4" />  
-**Figure 50: Change Default Password**  
-<img width="634" height="460" alt="Screenshot 2025-07-11 012214" src="https://github.com/user-attachments/assets/12c205ff-8280-4657-8bb6-165515015637" />  
+**Figure 50: Password Change**  
+<img width="634" height="460" alt="Change Password" src="https://github.com/user-attachments/assets/12c205ff-8280-4657-8bb6-165515015637" />
+
 **Figure 51: Gophish Dashboard**  
-<img width="1493" height="741" alt="Screenshot 2025-07-11 012241" src="https://github.com/user-attachments/assets/c6125d9b-a574-4441-a5cd-e69096eb345b" />
+<img width="1493" height="741" alt="Dashboard" src="https://github.com/user-attachments/assets/c6125d9b-a574-4441-a5cd-e69096eb345b" />
 
------------------------------------------------------------
+## Phase 6: Client Environment Setup
 
+### 6.1 Virtual Machine Deployment
 
-## Phase 6: Client VMs Deployment
+Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lubuntu for its minimal resource requirements.
 
----
-
-### Step 6.1: Lightweight Linux VM 
-
-For this project, we will deploy four lightweight Linux VM flavours, which will serve the purpose of simulating four clients, accessing disposable emails on the TempMail website. Will will be using Lubuntu, which is a lightweight Linux distribution. I have created a template on my Proxmox Home Lab and cloned it to get four separate VMs. I am not showing this process because I'm hoping you know. If you don't use Proxmpx, you can use any other Hypervisor, such as VirtualBox or VMware.
+**Note**: The VM deployment process using Proxmox, VirtualBox, or VMware is not detailed here as it's assumed you have virtualization experience.
 
 **Figure 52: Lubuntu Client VMs**  
-<img width="1378" height="732" alt="image" src="https://github.com/user-attachments/assets/6d69e9a8-3c80-4690-80f7-8d48939e3ab3" />
+<img width="1378" height="732" alt="Client VMs" src="https://github.com/user-attachments/assets/6d69e9a8-3c80-4690-80f7-8d48939e3ab3" />
 
+## Phase 7: Campaign Development and Execution
 
+### 7.1 Virtual Domain Creation
 
-Phase 7: Campaign Development and Testing
+#### 7.1.1 Create Target Domain
 
-Now, it is time to develop a campaign, and we need to source a good email template and an appropriate landing page for the test. For this project, I will use the Last.fm website. I have an email template from this website that will fit perfectly for this project. We will need to create a Virtual domain for the campaign on Poste.io.
+1. In Poste.io admin interface, navigate to **Virtual Domains**
+2. Click **Create a new virtual domain**
 
-**Figure 53: Email Template** <br>
-<img width="1314" height="1113" alt="image" src="https://github.com/user-attachments/assets/ac57e9c3-684a-434f-9c77-e36cb47c8655" />
+**Figure 54: Virtual Domains**  
+<img width="1666" height="536" alt="Virtual Domains" src="https://github.com/user-attachments/assets/685ebc33-e336-4330-bfcb-499d4eb6e8f6" />
 
-### Step 7.1: Virtual Domain Creation on Poste.io
+3. Create domain using: `mailer.last.fm` (matching your email template)
 
-On the Poste.io admin site, go to Virtual domains and click on Create a new virtual domain. <br>
-**Figure 54: Virtual domains** <br>
-<img width="1666" height="536" alt="image" src="https://github.com/user-attachments/assets/685ebc33-e336-4330-bfcb-499d4eb6e8f6" />
+**Figure 55: New Virtual Domain**  
+<img width="912" height="352" alt="New Domain" src="https://github.com/user-attachments/assets/c59a303f-fa65-4065-87ae-60feeb72b5ca" />
 
-Create the domain using the domain address from the email template, in my case `mailer.last.fm`, and submit it. <br>
-**Figure 55: New Virtual domain** 
-<img width="912" height="352" alt="image" src="https://github.com/user-attachments/assets/c59a303f-fa65-4065-87ae-60feeb72b5ca" />
+#### 7.1.2 Create Email Account
 
-Now, let's create a new email address for this domain, using the email address from the template. <br>
-**Figure 56: New email address** 
-<img width="1342" height="868" alt="image" src="https://github.com/user-attachments/assets/98085605-7243-4783-bed1-892df86c28c6" />
+1. Create a new email address for the campaign domain
 
-Fill in the info for the new email account and submit. <br>
-**Figure 57: New email filled out** 
-<img width="1146" height="689" alt="image" src="https://github.com/user-attachments/assets/bc0bd9b3-71ea-43f2-85b0-4f74c85346af" />
+**Figure 56: New Email Address**  
+<img width="1342" height="868" alt="New Email" src="https://github.com/user-attachments/assets/98085605-7243-4783-bed1-892df86c28c6" />
 
-**Figure 58: New email created** 
-<img width="1426" height="1033" alt="image" src="https://github.com/user-attachments/assets/ead884cd-f2da-492e-81ce-c9e92ea7e974" />
+2. Configure the email account details
 
-### Step 7.2: Test Email Delivery from new Virtual Domain
+**Figure 57: Email Configuration**  
+<img width="1146" height="689" alt="Email Config" src="https://github.com/user-attachments/assets/bc0bd9b3-71ea-43f2-85b0-4f74c85346af" />
 
-First, log in to the Webmail. <br>
+**Figure 58: Email Account Created**  
+<img width="1426" height="1033" alt="Email Created" src="https://github.com/user-attachments/assets/ead884cd-f2da-492e-81ce-c9e92ea7e974" />
 
-**Figure 59: Webmail portal** <br>
-<img width="485" height="36" alt="image" src="https://github.com/user-attachments/assets/4907565e-0458-43a1-8647-7b68b7e5ab4d" />
+#### 7.1.3 Test Virtual Domain
 
-Use the new email created for the target domain campaign. <br>
-**Figure 60: Webmail Credentials** <br> 
-<img width="819" height="512" alt="image" src="https://github.com/user-attachments/assets/0a614025-98fb-4125-ad72-42c493f1cb89" />
+1. Access webmail portal
 
-Compose an email and send to a disposable email address on TempEmail.
+**Figure 59: Webmail Portal**  
+<img width="485" height="36" alt="Webmail Portal" src="https://github.com/user-attachments/assets/4907565e-0458-43a1-8647-7b68b7e5ab4d" />
 
-**Figure 60: Temp email** <br>
-<img width="1310" height="297" alt="image" src="https://github.com/user-attachments/assets/81d0a20c-36af-4c41-947c-d667f6b21d8f" /><br>
+2. Log in with the campaign email credentials
 
-**Figure 61: Composed email** <br>
-<img width="1208" height="655" alt="image" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" /><br>
+**Figure 60: Webmail Login**  
+<img width="819" height="512" alt="Webmail Credentials" src="https://github.com/user-attachments/assets/0a614025-98fb-4125-ad72-42c493f1cb89" />
 
-Check if the email was received.
-**Figure 62: Inbox** <br>
-<img width="1299" height="530" alt="image" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" /> <br>
-**Figure 63: Email body** <br>
-<img width="746" height="472" alt="image" src="https://github.com/user-attachments/assets/19f38acb-fd77-440d-a898-4e12ee1d8a4f" /> <br>
+3. Send test email to verify functionality
 
-Now, we are sure that our email server is delivering emails with the Virtual Domain created by it, and we are ready for the next step.
+**Figure 61: Test Email**  
+<img width="1208" height="655" alt="Test Email" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" />
 
-### Step 7.2: Gophish Campaign Setup
+4. Confirm delivery to disposable email
 
-1. Email Template Creation
+**Figure 62: Email Delivery**  
+<img width="1299" height="530" alt="Email Delivery" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" />
 
-Navigate to Email Templates and click on New Template
-**Figure 64: Email Templates**
-<img width="1680" height="468" alt="image" src="https://github.com/user-attachments/assets/2b5e54c9-8ea9-45da-ad7e-1ab1f742432e" />
+**Figure 63: Email Content**  
+<img width="746" height="472" alt="Email Content" src="https://github.com/user-attachments/assets/19f38acb-fd77-440d-a898-4e12ee1d8a4f" />
 
-Fill in the info, and as I have a sample email for my template, I will use it, and click on Import Email.
-**Figure 65: Template Email info**
-<img width="701" height="494" alt="image" src="https://github.com/user-attachments/assets/0bf2896a-51ba-4acc-bdef-46740b29e3f3" />
+### 7.2 Gophish Campaign Configuration
 
-I'm trying to access the email sample, but since I'm in Gmail, I need the source code. On Gmail, you can access it by clicking on the three dots on the right-hand side corner, then clicking on Show Original.
-**Figure 66: Template Email**
-<img width="1301" height="909" alt="image" src="https://github.com/user-attachments/assets/99308790-692b-403d-b946-2cbddd055831" />
+#### 7.2.1 Email Template Creation
 
-Click on  Copy to Clipboard
-**Figure 67: Copy original Email**
-<img width="1586" height="589" alt="image" src="https://github.com/user-attachments/assets/a7e4ba57-f421-44f4-ae6f-a5df8f159a40" />
+1. Navigate to **Email Templates** and click **New Template**
 
-Now paste the Original mail into the Import Email window on Gophish, and check Change Links to Point to Landing Page and then click on import.
-**Figure 68: Import Email**
-<img width="711" height="499" alt="image" src="https://github.com/user-attachments/assets/59ae8291-1a15-4186-a754-7afd6fbdb28e" />
+**Figure 64: Email Templates**  
+<img width="1680" height="468" alt="Email Templates" src="https://github.com/user-attachments/assets/2b5e54c9-8ea9-45da-ad7e-1ab1f742432e" />
 
-Now that you have all fill in you cna save the template
-**Figure 69: Saving Email Template**
-<img width="694" height="1248" alt="image" src="https://github.com/user-attachments/assets/586096fc-7198-4f1b-b548-59c5b6bccb5a" />
+2. Configure template details and import original email
 
-**Figure 69: Saved Email Template**
-<img width="1413" height="396" alt="image" src="https://github.com/user-attachments/assets/e11e168b-098b-48a8-b079-ccb13155c7eb" />
+**Figure 65: Template Configuration**  
+<img width="701" height="494" alt="Template Config" src="https://github.com/user-attachments/assets/0bf2896a-51ba-4acc-bdef-46740b29e3f3" />
 
-2. User Group Configuration
+3. Obtain email source code (in Gmail: three dots → Show Original)
 
-For this, we need to run our 4 Lubuntu VMs clients, open the browser and navigate to TempEmail and get an email account for each VM.
+**Figure 66: Email Source**  
+<img width="1301" height="909" alt="Email Source" src="https://github.com/user-attachments/assets/99308790-692b-403d-b946-2cbddd055831" />
 
-*Figure 70: Proxmox VMs running*
-<img width="1111" height="563" alt="Screenshot 2025-07-11 140534" src="https://github.com/user-attachments/assets/1fb12a3d-482e-4045-a20c-370e7332c78a" />
+**Figure 67: Copy Email Source**  
+<img width="1586" height="589" alt="Copy Source" src="https://github.com/user-attachments/assets/a7e4ba57-f421-44f4-ae6f-a5df8f159a40" />
 
-*Figure 71: VM1 Disposable Email*
-<img width="1275" height="548" alt="Screenshot 2025-07-11 140810" src="https://github.com/user-attachments/assets/d5e08802-4a3a-4ef6-a28c-c19ef0038166" />
+4. Import email and configure settings
 
-*Figure 72: VM2 Disposable Email*
-<img width="1265" height="481" alt="Screenshot 2025-07-11 140907" src="https://github.com/user-attachments/assets/932fb45c-a295-41d7-a736-7cc38c1c4355" />
+**Figure 68: Import Email**  
+<img width="711" height="499" alt="Import Email" src="https://github.com/user-attachments/assets/59ae8291-1a15-4186-a754-7afd6fbdb28e" />
 
-*Figure 73: VM3 Disposable Email*
-<img width="1270" height="487" alt="Screenshot 2025-07-11 140955" src="https://github.com/user-attachments/assets/4d1d314b-b3b5-44e0-b52f-783396dcd99e" />
+5. Save the template
 
-*Figure 74: VM4 Disposable Email*
-<img width="1200" height="464" alt="Screenshot 2025-07-11 141133" src="https://github.com/user-attachments/assets/ec950ae0-9d3c-400c-8aff-3b60ae86021d" />
+**Figure 69: Save Template**  
+<img width="694" height="1248" alt="Save Template" src="https://github.com/user-attachments/assets/586096fc-7198-4f1b-b548-59c5b6bccb5a" />
 
-Navigate to Users & Groups and click on New Group
-*Figure 75: Users & Groups*
-<img width="1676" height="396" alt="Screenshot 2025-07-11 140441" src="https://github.com/user-attachments/assets/e8cfe1f8-331b-48d3-95db-d1595c809121" />
+**Figure 70: Template Saved**  
+<img width="1413" height="396" alt="Template Saved" src="https://github.com/user-attachments/assets/e11e168b-098b-48a8-b079-ccb13155c7eb" />
 
-On New Group, click on download the CSV template, it will be easier to do it this way.
-*Figure 76: Use CSV*
-<img width="694" height="241" alt="Screenshot 2025-07-11 141253" src="https://github.com/user-attachments/assets/71fcd397-31ee-4e00-b2cb-245edfe823a6" />
+#### 7.2.2 User Group Configuration
 
-Fill in the disposable emails from VM1 to VM4 along with their first name, last name and position and save the CSV.
-*Figure 77: CSV Filled In*
-<img width="994" height="394" alt="Screenshot 2025-07-11 141310" src="https://github.com/user-attachments/assets/1eadf130-e1fd-4539-beb4-0a7e73d2e5e1" />
+1. Boot your Lubuntu VMs and obtain disposable email addresses for each
 
-Click on Bulk Import Users and select the CSV you filled in.
-*Figure 78: Bulk Import*
-<img width="693" height="677" alt="Screenshot 2025-07-11 141343" src="https://github.com/user-attachments/assets/ba99e002-62d9-47eb-a8f5-c6fde437d455" />
+**Figure 71: VM1 Email**  
+<img width="1275" height="548" alt="VM1 Email" src="https://github.com/user-attachments/assets/d5e08802-4a3a-4ef6-a28c-c19ef0038166" />
 
-3. Landing Page Development
+**Figure 72: VM2 Email**  
+<img width="1265" height="481" alt="VM2 Email" src="https://github.com/user-attachments/assets/932fb45c-a295-41d7-a736-7cc38c1c4355" />
 
-As we are using the Last.fm email template, we need to source a page from the original website where we can collect credentials.
+**Figure 73: VM3 Email**  
+<img width="1270" height="487" alt="VM3 Email" src="https://github.com/user-attachments/assets/4d1d314b-b3b5-44e0-b52f-783396dcd99e" />
 
-*Figure 79: Last.fm Login Page*
-<img width="1712" height="678" alt="image" src="https://github.com/user-attachments/assets/2e94f5e5-6b51-4116-a96c-8217597ab031" />
+**Figure 74: VM4 Email**  
+<img width="1200" height="464" alt="VM4 Email" src="https://github.com/user-attachments/assets/ec950ae0-9d3c-400c-8aff-3b60ae86021d" />
 
-Navigate to Landing Pages and click on New Page.
-*Figure 80: Landing pages*
-<img width="1692" height="536" alt="image" src="https://github.com/user-attachments/assets/87f90c20-9949-4e1a-abc9-c0b73bfc77c8" />
+2. Navigate to **Users & Groups** and click **New Group**
 
-Give a name and click on Import Site.
-*Figure 81: Landing Fill in*
-<img width="700" height="260" alt="image" src="https://github.com/user-attachments/assets/be85738f-9a90-4488-864b-1045d8ac6ee2" />
+**Figure 75: Users & Groups**  
+<img width="1676" height="396" alt="Users & Groups" src="https://github.com/user-attachments/assets/e8cfe1f8-331b-48d3-95db-d1595c809121" />
 
-Import Last.fm login page.
-*Figure 82: Importin Last.fm*
-<img width="693" height="271" alt="Screenshot 2025-07-11 135312" src="https://github.com/user-attachments/assets/f540f4de-c2f4-418c-b4ac-d1db23a97d75" />
+3. Download the CSV template for easier bulk import
 
-Check Capture Submited Data, Capture Passwords and on Redirect to put the original Last.From the login page, click on Save Page.
-*Figure 83: Landing Page Filled In*
-<img width="700" height="983" alt="Screenshot 2025-07-11 135530" src="https://github.com/user-attachments/assets/e24fd7ac-61cd-4d7e-9e67-1060894f04b9" />
+**Figure 76: CSV Template**  
+<img width="694" height="241" alt="CSV Template" src="https://github.com/user-attachments/assets/71fcd397-31ee-4e00-b2cb-245edfe823a6" />
 
-*Figure 84: Landing Page Saved*
-<img width="1441" height="427" alt="Screenshot 2025-07-11 135641" src="https://github.com/user-attachments/assets/1aebe9f3-e0cb-4d64-9c17-ef2fb089f2f5" />
+4. Fill in the CSV with target information (emails from VMs, names, positions)
 
-4. Sending Profiles Configuration
+**Figure 77: Completed CSV**  
+<img width="994" height="394" alt="CSV Data" src="https://github.com/user-attachments/assets/1eadf130-e1fd-4539-beb4-0a7e73d2e5e1" />
 
-Now we need to configure Gophish to use Poste.io to send the emails for our campaign. Go to Sending Profiles and then click on New Profile.
-*Figure 85: Create a New Sending Profile*
-<img width="1705" height="630" alt="image" src="https://github.com/user-attachments/assets/c5ba4eea-7063-4321-8d24-5c58d15b294f" />
+5. Use **Bulk Import Users** to upload the CSV
 
-Fill in the details, remember we will use the Virtual domain we created on Poste.io for our campaign, and for Host we need to use the public IP of the server and the port 465. When that is done before saving the profile, click on Send Test email to see if Gophish is able to use our SMTP server, then click on Save Profile.
-*Figure 86: Sending Profile Filled in*
-<img width="707" height="1057" alt="image" src="https://github.com/user-attachments/assets/7b10072a-3a7b-4c3a-9b12-61cfb2329d59" />
+**Figure 78: Bulk Import**  
+<img width="693" height="677" alt="Bulk Import" src="https://github.com/user-attachments/assets/ba99e002-62d9-47eb-a8f5-c6fde437d455" />
 
-*Figure 87: Sending Profile Saved*
-<img width="1406" height="441" alt="image" src="https://github.com/user-attachments/assets/17c33129-029d-4d33-9bd5-94cab374eed6" />
+#### 7.2.3 Landing Page Development
 
-5. Campaign Creation
+1. Navigate to **Landing Pages** and click **New Page**
 
-Now that we have all the other parts set up it is time to create the campaign, navigate to Campaigns and then click on New Campaign.
-*Figure 88: Create a new campaign*
-<img width="1275" height="495" alt="Screenshot 2025-07-11 141418" src="https://github.com/user-attachments/assets/cab1ed59-230d-42fd-99d7-3c4a3db98fff" />
+**Figure 79: Landing Pages**  
+<img width="1692" height="536" alt="Landing Pages" src="https://github.com/user-attachments/assets/87f90c20-9949-4e1a-abc9-c0b73bfc77c8" />
 
-Fill in the details. For the URL which is the Gophish listener, use the Server Public IP and port 8081. By default, it's port 80, but we've changed it to port 8081 for Poste.io's UI, now and click on Launch Campaign
-*Figure 89: Campaign Launch*
-<img width="701" height="771" alt="image" src="https://github.com/user-attachments/assets/3bdfff1b-6a70-4365-b769-d097a9f83407" />
+2. Configure landing page name and import target site (Last.fm login page)
 
-6. Real-time Monitoring
+**Figure 80: Landing Page Configuration**  
+<img width="700" height="260" alt="Landing Config" src="https://github.com/user-attachments/assets/be85738f-9a90-4488-864b-1045d8ac6ee2" />
 
-We will simulate the clients by opening the emails received and clicking on the links.
+**Figure 81: Import Last.fm**  
+<img width="693" height="271" alt="Import Site" src="https://github.com/user-attachments/assets/f540f4de-c2f4-418c-b4ac-d1db23a97d75" />
 
-After the campaign launch, we start monitoring for events. 
-*Figure 89: Campaign Monitoring*
-<img width="1688" height="1057" alt="Screenshot 2025-07-11 141741" src="https://github.com/user-attachments/assets/019e7424-548c-4aed-a3aa-5ac091fa7681" />
+3. Configure data capture settings and redirect URL
 
-We have sent four emails, one of which is open, and a link was clicked.
-*Figure 90: Campaign Responses*
-<img width="1420" height="662" alt="image" src="https://github.com/user-attachments/assets/d75f8e77-1a38-4eac-b8e2-2c04edc5406a" />
+**Figure 82: Landing Page Settings**  
+<img width="700" height="983" alt="Landing Settings" src="https://github.com/user-attachments/assets/e24fd7ac-61cd-4d7e-9e67-1060894f04b9" />
 
-Let's check who clicked on the link.
-*Figure 91: First Response*
-<img width="1370" height="339" alt="image" src="https://github.com/user-attachments/assets/14d1feaa-34df-450e-a478-d119e474b7e2" />
+**Figure 83: Landing Page Saved**  
+<img width="1441" height="427" alt="Landing Saved" src="https://github.com/user-attachments/assets/1aebe9f3-e0cb-4d64-9c17-ef2fb089f2f5" />
 
-Let's simulate that the client enters the credentials.
-*Figure 92: User Credentials*
-<img width="1148" height="581" alt="image" src="https://github.com/user-attachments/assets/4a903b00-6800-47c6-94cd-2e0151daf4fd" />
+#### 7.2.4 Sending Profile Configuration
 
-On Gophish, we can see that the credentials were recorded.
-*Figure 93: Credentials Recorded*
-<img width="1414" height="655" alt="Screenshot 2025-07-11 150854" src="https://github.com/user-attachments/assets/d4763dba-3ad4-4dac-ba9d-f1fdb2782eac" />
+1. Navigate to **Sending Profiles** and click **New Profile**
 
-Let's check the credentials, as you can see Gophish successfully recorded the client credentials, proving that a successful phishing attack.
-*Figure 94: Credentials*
-<img width="1395" height="834" alt="Screenshot 2025-07-11 150922" src="https://github.com/user-attachments/assets/f8eff93d-961a-43e2-96f6-4bde2a3500e7" />
+**Figure 84: Sending Profiles**  
+<img width="1705" height="630" alt="Sending Profiles" src="https://github.com/user-attachments/assets/c5ba4eea-7063-4321-8d24-5c58d15b294f" />
 
-Now let's do the same for the rest of the clients.
-*Figure 95: All clients' data submitted*
-<img width="1416" height="728" alt="Screenshot 2025-07-11 152258" src="https://github.com/user-attachments/assets/a548f59f-3d18-4eda-8e15-09135f8d3e92" />
+2. Configure SMTP settings using Poste.io virtual domain
+   - **Host**: Server public IP with port 465
+   - **Username/Password**: Virtual domain email credentials
+   - Test email delivery before saving
 
-*Figure 96: Credentials Recorded*
-<img width="1350" height="791" alt="Screenshot 2025-07-11 152319" src="https://github.com/user-attachments/assets/6409502a-c2de-403e-b3b1-bd74e0a485cc" />
-*Figure 97: Credentials Recorded*
-<img width="1342" height="776" alt="Screenshot 2025-07-11 152336" src="https://github.com/user-attachments/assets/ffbf9e29-c482-4861-829d-359f9f1c1695" />
-*Figure 98: Credentials Recorded*
-<img width="1295" height="802" alt="Screenshot 2025-07-11 152400" src="https://github.com/user-attachments/assets/9bfe7a52-bb56-458f-b465-4c3bcf257d0b" />
+**Figure 85: SMTP Configuration**  
+<img width="707" height="1057" alt="SMTP Config" src="https://github.com/user-attachments/assets/7b10072a-3a7b-4c3a-9b12-61cfb2329d59" />
 
-After success, we can complete the campaign.
-*Figure 99: Campaign Completion*
-<img width="1417" height="788" alt="Screenshot 2025-07-11 152534" src="https://github.com/user-attachments/assets/0299cce3-515e-48e1-800b-8c480252f8d2" />
+**Figure 86: Profile Saved**  
+<img width="1406" height="441" alt="Profile Saved" src="https://github.com/user-attachments/assets/17c33129-029d-4d33-9bd5-94cab374eed6" />
 
----
+#### 7.2.5 Campaign Creation and Launch
+
+1. Navigate to **Campaigns** and click **New Campaign**
+
+**Figure 87: New Campaign**  
+<img width="1275" height="495" alt="New Campaign" src="https://github.com/user-attachments/assets/cab1ed59-230d-42fd-99d7-3c4a3db98fff" />
+
+2. Configure campaign settings:
+   - **URL**: Server public IP with port 8081 (Gophish listener)
+   - Select previously created templates, groups, and sending profiles
+   - Launch the campaign
+
+**Figure 88: Campaign Configuration**  
+<img width="701" height="771" alt="Campaign Config" src="https://github.com/user-attachments/assets/3bdfff1b-6a70-4365-b769-d097a9f83407" />
+
+### 7.3 Campaign Execution and Monitoring
+
+#### 7.3.1 Real-time Campaign Monitoring
+
+Monitor campaign progress in the Gophish dashboard:
+
+**Figure 89: Campaign Monitoring**  
+<img width="1688" height="1057" alt="Campaign Monitor" src="https://github.com/user-attachments/assets/019e7424-548c-4aed-a3aa-5ac091fa7681" />
+
+**Figure 90: Campaign Responses**  
+<img width="1420" height="662" alt="Campaign Responses" src="https://github.com/user-attachments/assets/d75f8e77-1a38-4eac-b8e2-2c04edc5406a" />
+
+#### 7.3.2 User Interaction Simulation
+
+1. Monitor individual user responses
+
+**Figure 91: Individual Response**  
+<img width="1370" height="339" alt="User Response" src="https://github.com/user-attachments/assets/14d1feaa-34df-450e-a478-d119e474b7e2" />
+
+2. Simulate credential entry on the landing page
+
+**Figure 92: Credential Entry**  
+<img width="1148" height="581" alt="Credential Entry" src="https://github.com/user-attachments/assets/4a903b00-6800-47c6-94cd-2e0151daf4fd" />
+
+3. Verify credential capture in Gophish
+
+**Figure 93: Credentials Captured**  
+<img width="1414" height="655" alt="Credentials Captured" src="https://github.com/user-attachments/assets/d4763dba-3ad4-4dac-ba9d-f1fdb2782eac" />
+
+**Figure 94: Credential Details**  
+<img width="1395" height="834" alt="Credential Details" src="https://github.com/user-attachments/assets/f8eff93d-961a-43e2-96f6-4bde2a3500e7" />
+
+#### 7.3.3 Complete Campaign Results
+
+After simulating all user interactions:
+
+**Figure 95: All Submissions**  
+<img width="1416" height="728" alt="All Submissions" src="https://github.com/user-attachments/assets/a548f59f-3d18-4eda-8e15-09135f8d3e92" />
+
+**Figure 96: Captured Credentials 1**  
+<img width="1350" height="791" alt="Credentials 1" src="https://github.com/user-attachments/assets/6409502a-c2de-403e-b3b1-bd74e0a485cc" />
+
+**Figure 97: Captured Credentials 2**  
+<img width="1342" height="776" alt="Credentials 2" src="https://github.com/user-attachments/assets/ffbf9e29-c482-4861-829d-359f9f1c1695" />
+
+**Figure 98: Captured Credentials 3**  
+<img width="1295" height="802" alt="Credentials 3" src="https://github.com/user-attachments/assets/9bfe7a52-bb56-458f-b465-4c3bcf257d0b" />
+
+**Figure 99: Campaign Completion**  
+<img width="1417" height="788" alt="Campaign Complete" src="https://github.com/user-attachments/assets/0299cce3-515e-48e1-800b-8c480252f8d2" />
 
 ## Project Conclusion
 
-This project successfully demonstrates the end-to-end process of setting up and executing a phishing simulation lab. By integrating Gophish, Poste.io, and virtual clients in a safe environment, it replicates the core phases of real-world phishing campaigns — from email crafting to credential harvesting and post-campaign analysis. This hands-on experience highlights how threat actors operate and how blue teams can detect and mitigate such attacks.
+This comprehensive phishing simulation lab successfully demonstrates the complete lifecycle of a phishing attack in a controlled environment. By integrating Gophish with Poste.io and deploying virtual client machines, we've replicated the core phases of real-world phishing campaigns:
 
----
+### Key Achievements
+- **Infrastructure Setup**: Successfully deployed cloud-based phishing infrastructure using Kamatera, Docker, and Ubuntu Server
+- **Email Spoofing**: Configured Poste.io to send convincing phishing emails with spoofed domains
+- **Campaign Execution**: Created realistic phishing templates, landing pages, and user groups
+- **Data Capture**: Demonstrated credential harvesting and user interaction tracking
+- **Security Awareness**: Highlighted vulnerabilities in human behaviour and email security
 
-## Disclaimer
+### Learning Outcomes
+This lab provides hands-on experience with:
+- **Attack Methodologies**: Understanding how threat actors design and execute phishing campaigns
+- **Infrastructure Components**: Learning the technical requirements for phishing operations
+- **Detection Opportunities**: Identifying points where security controls could intervene
+- **User Behaviour**: Observing how users interact with malicious content
+- **Defensive Strategies**: Developing awareness of protection mechanisms and training needs
 
-> This guide is intended **strictly for educational and ethical testing purposes** within **controlled environments**.  
-> Unauthorised deployment of phishing simulations or email spoofing in real environments or against unsuspecting individuals is illegal and unethical. Please always get the proper authorisation before conducting simulations.
+### Practical Applications
+The skills and knowledge gained from this lab apply to:
+- **Security Awareness Training**: Designing effective user education programs
+- **Red Team Operations**: Conducting authorized penetration testing
+- **Blue Team Defense**: Improving detection and response capabilities
+- **Risk Assessment**: Evaluating organisational vulnerability to social engineering
+- **Incident Response**: Understanding attack vectors and evidence collection
 
----
+## Ethical Use and Legal Disclaimer
+
+> **Critical Warning:**  
+> This guide is intended **exclusively for educational and authorised testing purposes** within **controlled environments**. The techniques demonstrated must only be used with explicit written permission from system owners and within the scope of legitimate security testing or training programs.
+
+### Legal Requirements
+- **Authorisation**: Always obtain proper written authorisation before conducting any phishing simulations
+- **Scope Limitation**: Only target systems and users explicitly included in the authorised testing scope
+- **Data Protection**: Ensure all captured data is handled according to applicable privacy laws and regulations
+- **Documentation**: Maintain detailed records of all testing activities for audit purposes
+
+### Prohibited Uses
+The following activities are strictly forbidden:
+- Conducting unauthorised phishing attacks against any individual or organisation
+- Using these techniques for financial gain, identity theft, or other criminal purposes
+- Deploying phishing infrastructure without proper authorisation and oversight
+- Sharing captured credentials or personal information outside the authorised testing team
+- Using spoofed domains that could damage legitimate organisations' reputations
 
 ## Troubleshooting Guide
 
-### Poste.io Doesn't Send to Gmail/Outlook
-- These providers block messages from servers without proper DNS (PTR, SPF, DKIM) records.
-- This setup lacks domain verification and is intended only for **internal/disposable email testing**.
+### Common Issues and Solutions
 
-### Gophish Interface Doesn’t Load
-- Ensure port `3333` is open in your firewall rules and accessible.
-- Verify `config.json` contains `"listen_url": "0.0.0.0:3333"`
+#### Email Delivery Problems
+**Issue**: Emails not reaching target inboxes
+- **Cause**: Missing DNS records, blacklisted IP, or blocked ports
+- **Solution**: Use disposable email services for testing; verify Poste.io configuration
+- **Note**: This setup intentionally lacks proper email authentication for educational purposes
 
-### Docker Mail Server Container Fails to Start
-- Check for conflicting ports (e.g., another service using 25, 443, or 80)
-- Re-run with `--rm` flag for cleanup: `docker rm -f mailserver`
+#### Gophish Interface Accessibility
+**Issue**: Cannot access Gophish web interface
+- **Cause**: Firewall blocking port 3333 or incorrect listen configuration
+- **Solution**: 
+  - Verify firewall rules allow traffic on port 3333
+  - Confirm `config.json` uses `"listen_url": "0.0.0.0:3333"`
+  - Check server security groups in the cloud provider console
 
-### Campaign Emails Not Delivered
-- Ensure Poste.io is running and the sending profile in Gophish uses correct SMTP and port `465`.
-- Use TempMail or any disposable service to confirm delivery.
+#### Docker Container Issues
+**Issue**: Poste.io container fails to start
+- **Cause**: Port conflicts or insufficient permissions
+- **Solution**:
+  - Stop conflicting services using ports 25, 80, 443, 465, 993, 995
+  - Remove existing container: `docker rm -f mailserver`
+  - Restart with proper permissions and unique ports
 
-### Landing Page Doesn’t Render Correctly
-- Ensure imported source HTML is clean and all required assets (CSS, JS) are reachable.
-- Use “Import Site” only for basic HTML — modern JavaScript-heavy sites may fail to import.
+#### Landing Page Display Problems
+**Issue**: Landing page doesn't render correctly
+- **Cause**: Missing CSS/JavaScript resources or HTTPS/HTTP conflicts
+- **Solution**:
+  - Use simple HTML templates without complex JavaScript
+  - Ensure all resources are properly imported
+  - Test with basic forms before adding complexity
+
+## Additional Resources
+
+### Documentation and Guides
+- **Gophish Documentation**: [https://docs.getgophish.com](https://docs.getgophish.com)
+- **Poste.io Setup Guide**: [https://poste.io/doc](https://poste.io/doc)
+- **Docker Best Practices**: [https://docs.docker.com/develop/best-practices](https://docs.docker.com/develop/best-practices)
+
+### Security Frameworks
+- **NIST Cybersecurity Framework**: Guidelines for security assessment and improvement
+- **OWASP Testing Guide**: Web application security testing methodologies
+- **SANS Security Awareness**: Resources for security training program development
+
+### Community Support
+- **Gophish Community**: GitHub issues and discussions for technical support
+- **Security Forums**: Professional communities for sharing best practices
+- **Training Programs**: Certified ethical hacking and penetration testing courses
+
+---
+
+*This guide represents a comprehensive approach to understanding phishing attack methodologies through safe, controlled simulation. You can use this knowledge responsibly to improve cybersecurity awareness and defensive capabilities.*
