@@ -492,6 +492,277 @@ For this project, we will deploy four lightweight Linux VM flavours, which will 
 
 Phase 7: Campaign Development and Testing
 
+Now, it is time to develop a campaign, and we need to source a good email template and an appropriate landing page for the test. For this project, I will use the Last.fm website. I have an email template from this website that will fit perfectly for this project. We will need to create a Virtual domain for the campaign on Poste.io.
+
+*Figure 53: Email Template* 
+<img width="1314" height="1113" alt="image" src="https://github.com/user-attachments/assets/ac57e9c3-684a-434f-9c77-e36cb47c8655" />
+
+### Step 7.1: Virtual Domain Creation on Poste.io
+
+On Poste.io admin site go to Virtual domains and click on Create a new virtual domain.
+*Figure 54: Virtual domains* 
+<img width="1666" height="536" alt="image" src="https://github.com/user-attachments/assets/685ebc33-e336-4330-bfcb-499d4eb6e8f6" />
+
+Create the domain using the domain address from the email template in my case `mailer.last.fm`, and submit it.
+*Figure 55: New Virtual domain* 
+<img width="912" height="352" alt="image" src="https://github.com/user-attachments/assets/c59a303f-fa65-4065-87ae-60feeb72b5ca" />
+
+Now, let's create a a new email address for this doamil, use the email address from the template.
+*Figure 56: New email address* 
+<img width="1342" height="868" alt="image" src="https://github.com/user-attachments/assets/98085605-7243-4783-bed1-892df86c28c6" />
+
+Fill in the info for the new email account and submit.
+*Figure 57: New email filled out* 
+<img width="1146" height="689" alt="image" src="https://github.com/user-attachments/assets/bc0bd9b3-71ea-43f2-85b0-4f74c85346af" />
+
+*Figure 58: New email created* 
+<img width="1426" height="1033" alt="image" src="https://github.com/user-attachments/assets/ead884cd-f2da-492e-81ce-c9e92ea7e974" />
+
+### Step 7.2: Test Email Delivery from new Virtual Domain
+
+First, log in to the Webmail.
+
+*Figure 59: Webmail portal* 
+<img width="485" height="36" alt="image" src="https://github.com/user-attachments/assets/4907565e-0458-43a1-8647-7b68b7e5ab4d" />
+
+Use the new email created for the target domain campaign.
+*Figure 60: Webmail Credentials* 
+<img width="819" height="512" alt="image" src="https://github.com/user-attachments/assets/0a614025-98fb-4125-ad72-42c493f1cb89" />
+
+Compose an email and send to a disposable email address on TempEmail.
+
+*Figure 60: Temp email* 
+<img width="1310" height="297" alt="image" src="https://github.com/user-attachments/assets/81d0a20c-36af-4c41-947c-d667f6b21d8f" />
+
+*Figure 61: Composed email* 
+<img width="1208" height="655" alt="image" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" />
+
+Check if the email was received.
+*Figure 62: Inbox* 
+<img width="1299" height="530" alt="image" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" />
+*Figure 63: Email body* 
+<img width="746" height="472" alt="image" src="https://github.com/user-attachments/assets/19f38acb-fd77-440d-a898-4e12ee1d8a4f" />
+
+Now, we are sure that our email server is delivering emails with the Virtual Domain created by it, and we are ready for the next step.
+
+### Step 7.2: Gophish Campaign Setup
+
+1. Email Template Creation
+
+Navigate to Email Templates and click on New Template
+*Figure 64: Email Templates*
+<img width="1680" height="468" alt="image" src="https://github.com/user-attachments/assets/2b5e54c9-8ea9-45da-ad7e-1ab1f742432e" />
+
+Fill in the info and as I have a sample email for my template, I will use it, for click on Import Email.
+*Figure 65: Temapl Email info*
+<img width="701" height="494" alt="image" src="https://github.com/user-attachments/assets/0bf2896a-51ba-4acc-bdef-46740b29e3f3" />
+
+I'm trying to access the email sample, but since I'm in Gmail, I need the source code. On Gmail, you can access it by clicking on the three dots on the right-hand side corner, then clicking on Show Original.
+*Figure 66: Template Email*
+<img width="1301" height="909" alt="image" src="https://github.com/user-attachments/assets/99308790-692b-403d-b946-2cbddd055831" />
+
+Click on  Copy to Clipboard
+*Figure 67: Copy original Email*
+<img width="1586" height="589" alt="image" src="https://github.com/user-attachments/assets/a7e4ba57-f421-44f4-ae6f-a5df8f159a40" />
+
+Now paste the Original mail into the Import Email window on Gophish, and check Change Links to Point to Landing Page and then click on import.
+*Figure 68: Import Email*
+<img width="711" height="499" alt="image" src="https://github.com/user-attachments/assets/59ae8291-1a15-4186-a754-7afd6fbdb28e" />
+
+Now that you have all fill in you cna save the template
+*Figure 69: Saving Email Template*
+<img width="694" height="1248" alt="image" src="https://github.com/user-attachments/assets/586096fc-7198-4f1b-b548-59c5b6bccb5a" />
+
+*Figure 69: Saved Email Template*
+<img width="1413" height="396" alt="image" src="https://github.com/user-attachments/assets/e11e168b-098b-48a8-b079-ccb13155c7eb" />
+
+2. User Group Configuration
+
+For this, we need to run our 4 Lubuntu VMs clients, open the browser and navigate to TempEmail and get an email account for each VM.
+
+*Figure 70: Proxmox VMs running*
+<img width="1111" height="563" alt="Screenshot 2025-07-11 140534" src="https://github.com/user-attachments/assets/1fb12a3d-482e-4045-a20c-370e7332c78a" />
+
+*Figure 71: VM1 Disposable Email*
+<img width="1275" height="548" alt="Screenshot 2025-07-11 140810" src="https://github.com/user-attachments/assets/d5e08802-4a3a-4ef6-a28c-c19ef0038166" />
+
+*Figure 72: VM2 Disposable Email*
+<img width="1265" height="481" alt="Screenshot 2025-07-11 140907" src="https://github.com/user-attachments/assets/932fb45c-a295-41d7-a736-7cc38c1c4355" />
+
+*Figure 73: VM3 Disposable Email*
+<img width="1270" height="487" alt="Screenshot 2025-07-11 140955" src="https://github.com/user-attachments/assets/4d1d314b-b3b5-44e0-b52f-783396dcd99e" />
+
+*Figure 74: VM4 Disposable Email*
+<img width="1200" height="464" alt="Screenshot 2025-07-11 141133" src="https://github.com/user-attachments/assets/ec950ae0-9d3c-400c-8aff-3b60ae86021d" />
+
+Navigate to Users & Groups and click on New Group
+*Figure 75: Users & Groups*
+<img width="1676" height="396" alt="Screenshot 2025-07-11 140441" src="https://github.com/user-attachments/assets/e8cfe1f8-331b-48d3-95db-d1595c809121" />
+
+On New Group, click on download the CSV template, it will be easier to do it this way.
+*Figure 76: Use CSV*
+<img width="694" height="241" alt="Screenshot 2025-07-11 141253" src="https://github.com/user-attachments/assets/71fcd397-31ee-4e00-b2cb-245edfe823a6" />
+
+Fill in the disposable emails from VM1 to VM4 along with their first name, last name and position and save the CSV.
+*Figure 77: CSV Filled In*
+<img width="994" height="394" alt="Screenshot 2025-07-11 141310" src="https://github.com/user-attachments/assets/1eadf130-e1fd-4539-beb4-0a7e73d2e5e1" />
+
+Click on Bulk Import Users and select the CSV you filled in.
+*Figure 78: Bulk Import*
+<img width="693" height="677" alt="Screenshot 2025-07-11 141343" src="https://github.com/user-attachments/assets/ba99e002-62d9-47eb-a8f5-c6fde437d455" />
+
+3. Landing Page Development
+
+As we are using the Last.fm email template, we need to source a page from the original website where we can collect credentials.
+
+*Figure 79: Last.fm Login Page*
+<img width="1712" height="678" alt="image" src="https://github.com/user-attachments/assets/2e94f5e5-6b51-4116-a96c-8217597ab031" />
+
+Navigate to Landing Pages and click on New Page.
+*Figure 80: Landing pages*
+<img width="1692" height="536" alt="image" src="https://github.com/user-attachments/assets/87f90c20-9949-4e1a-abc9-c0b73bfc77c8" />
+
+Give a name and click on Import Site.
+*Figure 81: Landing Fill in*
+<img width="700" height="260" alt="image" src="https://github.com/user-attachments/assets/be85738f-9a90-4488-864b-1045d8ac6ee2" />
+
+Import Last.fm login page.
+*Figure 82: Importin Last.fm*
+<img width="693" height="271" alt="Screenshot 2025-07-11 135312" src="https://github.com/user-attachments/assets/f540f4de-c2f4-418c-b4ac-d1db23a97d75" />
+
+Check Capture Submited Data, Capture Passwords and on Redirect to put the original Last.From the login page, click on Save Page.
+*Figure 83: Landing Page Filled In*
+<img width="700" height="983" alt="Screenshot 2025-07-11 135530" src="https://github.com/user-attachments/assets/e24fd7ac-61cd-4d7e-9e67-1060894f04b9" />
+
+*Figure 84: Landing Page Saved*
+<img width="1441" height="427" alt="Screenshot 2025-07-11 135641" src="https://github.com/user-attachments/assets/1aebe9f3-e0cb-4d64-9c17-ef2fb089f2f5" />
+
+4. Sending Profiles Configuration
+
+Now we need to configure Gophish to use Poste.io to send the emails for our campaign. Go to Sending Profiles and then click on New Profile.
+*Figure 85: Create a New Sending Profile*
+<img width="1705" height="630" alt="image" src="https://github.com/user-attachments/assets/c5ba4eea-7063-4321-8d24-5c58d15b294f" />
+
+Fill in the details, remember we will use the Virtual domain we created on Poste.io for our campaign, and for Host we need to use the public IP of the server and the port 465. When that is done before saving the profile, click on Send Test email to see if Gophish is able to use our SMTP server, then click on Save Profile.
+*Figure 86: Sending Profile Filled in*
+<img width="707" height="1057" alt="image" src="https://github.com/user-attachments/assets/7b10072a-3a7b-4c3a-9b12-61cfb2329d59" />
+
+*Figure 87: Sending Profile Saved*
+<img width="1406" height="441" alt="image" src="https://github.com/user-attachments/assets/17c33129-029d-4d33-9bd5-94cab374eed6" />
+
+5. Campaign Creation
+
+Now that we have all the other parts set up it is time to create the campaign, navigate to Campaigns and then click on New Campaign.
+*Figure 88: Create a new campaign*
+<img width="1275" height="495" alt="Screenshot 2025-07-11 141418" src="https://github.com/user-attachments/assets/cab1ed59-230d-42fd-99d7-3c4a3db98fff" />
+
+Fill in the details. For the URL which is the Gophish listener, use the Server Public IP and port 8081. By default, it's port 80, but we've changed it to port 8081 for Poste.io's UI, now and click on Launch Campaign
+*Figure 89: Campaign Launch*
+<img width="701" height="771" alt="image" src="https://github.com/user-attachments/assets/3bdfff1b-6a70-4365-b769-d097a9f83407" />
+
+6. Real-time Monitoring
+
+We will simulate the clients by opening the emails received and clicking on the links.
+
+After the campaign launch, we start monitoring for events. 
+*Figure 89: Campaign Monitoring*
+<img width="1688" height="1057" alt="Screenshot 2025-07-11 141741" src="https://github.com/user-attachments/assets/019e7424-548c-4aed-a3aa-5ac091fa7681" />
+
+We have sent four emails, one of which is open, and a link was clicked.
+*Figure 90: Campaign Responses*
+<img width="1420" height="662" alt="image" src="https://github.com/user-attachments/assets/d75f8e77-1a38-4eac-b8e2-2c04edc5406a" />
+
+Let's check who clicked on the link.
+*Figure 91: First Response*
+<img width="1370" height="339" alt="image" src="https://github.com/user-attachments/assets/14d1feaa-34df-450e-a478-d119e474b7e2" />
+
+Let's simulate that the client enters the credentials.
+*Figure 92: User Credentials*
+<img width="1148" height="581" alt="image" src="https://github.com/user-attachments/assets/4a903b00-6800-47c6-94cd-2e0151daf4fd" />
+
+On Gophish, we can see that the credentials were recorded.
+*Figure 93: Credentials Recorded*
+<img width="1414" height="655" alt="Screenshot 2025-07-11 150854" src="https://github.com/user-attachments/assets/d4763dba-3ad4-4dac-ba9d-f1fdb2782eac" />
+
+Let's check the credentials, as you can see Gophish successfully recorded the client credentials, proving that a successful phishing attack.
+*Figure 94: Credentials*
+<img width="1395" height="834" alt="Screenshot 2025-07-11 150922" src="https://github.com/user-attachments/assets/f8eff93d-961a-43e2-96f6-4bde2a3500e7" />
+
+Now let's do the same for the rest of the clients.
+*Figure 95: All clients' data submitted*
+<img width="1416" height="728" alt="Screenshot 2025-07-11 152258" src="https://github.com/user-attachments/assets/a548f59f-3d18-4eda-8e15-09135f8d3e92" />
+
+*Figure 96: Credentials Recorded*
+<img width="1350" height="791" alt="Screenshot 2025-07-11 152319" src="https://github.com/user-attachments/assets/6409502a-c2de-403e-b3b1-bd74e0a485cc" />
+*Figure 97: Credentials Recorded*
+<img width="1342" height="776" alt="Screenshot 2025-07-11 152336" src="https://github.com/user-attachments/assets/ffbf9e29-c482-4861-829d-359f9f1c1695" />
+*Figure 98: Credentials Recorded*
+<img width="1295" height="802" alt="Screenshot 2025-07-11 152400" src="https://github.com/user-attachments/assets/9bfe7a52-bb56-458f-b465-4c3bcf257d0b" />
+
+After success, we can complete the campaign.
+*Figure 99: Campaign Completion*
+<img width="1417" height="788" alt="Screenshot 2025-07-11 152534" src="https://github.com/user-attachments/assets/0299cce3-515e-48e1-800b-8c480252f8d2" />
+
+---
+
+## Project Conclusion
+
+This project successfully demonstrates the end-to-end process of setting up and executing a phishing simulation lab. By integrating Gophish, Poste.io, and virtual clients in a safe environment, it replicates the core phases of real-world phishing campaigns — from email crafting to credential harvesting and post-campaign analysis. This hands-on experience highlights how threat actors operate and how blue teams can detect and mitigate such attacks.
+
+---
+
+## Disclaimer
+
+> This guide is intended **strictly for educational and ethical testing purposes** within **controlled environments**.  
+> Unauthorised deployment of phishing simulations or email spoofing in real environments or against unsuspecting individuals is illegal and unethical. Please always get the proper authorisation before conducting simulations.
+
+---
+
+## Troubleshooting Guide
+
+### Poste.io Doesn't Send to Gmail/Outlook
+- These providers block messages from servers without proper DNS (PTR, SPF, DKIM) records.
+- This setup lacks domain verification and is intended only for **internal/disposable email testing**.
+
+### Gophish Interface Doesn’t Load
+- Ensure port `3333` is open in your firewall rules and accessible.
+- Verify `config.json` contains `"listen_url": "0.0.0.0:3333"`
+
+### Docker Mail Server Container Fails to Start
+- Check for conflicting ports (e.g., another service using 25, 443, or 80)
+- Re-run with `--rm` flag for cleanup: `docker rm -f mailserver`
+
+### Campaign Emails Not Delivered
+- Ensure Poste.io is running and the sending profile in Gophish uses correct SMTP and port `465`.
+- Use TempMail or any disposable service to confirm delivery.
+
+### Landing Page Doesn’t Render Correctly
+- Ensure imported source HTML is clean and all required assets (CSS, JS) are reachable.
+- Use “Import Site” only for basic HTML — modern JavaScript-heavy sites may fail to import.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
