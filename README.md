@@ -1,25 +1,47 @@
-# Phishing Attack Simulation with Gophish and Poste.io
+---
+title: "Phishing Attack Simulation Lab"
+description: "A step-by-step phishing lab using Gophish, Poste.io, and Kamatera cloud"
+author: "Your Name"
+date: 2025-07-13
+layout: default
+---
 
-## Objective
+# Phishing Attack Simulation Lab with Gophish & Poste.io
 
-This project showcases the setup and execution of a **controlled phishing simulation lab** using **Gophish** and **Poste.io**. The goal is to safely explore how phishing attacks work and strengthen cybersecurity skills in a hands-on environment.
+## Overview
 
-**Key Objectives:**
-- Conduct realistic phishing campaigns in a controlled lab setting  
-- Understand the functionality and capabilities of phishing tools  
-- Learn how phishing attacks are implemented in real-world scenarios  
-- Enhance cybersecurity and technical skillsets through practical experience  
+This lab simulates a **real-world phishing attack** in a safe and isolated environment. The objective is to understand phishing tactics, how malicious actors operate, and how defenders can detect and prevent such attacks using **Gophish** and **Poste.io**.
 
 ---
 
-## Acknowledgments
+## Learning Goals
 
-Special thanks to **@Sandra (With.Sandra's YouTube Channel)** for the inspiration and guidance that helped shape this project.  
-Additional gratitude to **hailbytes.com** for their advanced tutorials, which enabled the transition from an introductory lab to a **live email testing environment**.
+- Design and run realistic phishing campaigns
+- Explore the capabilities of phishing infrastructure (Gophish + Mail server)
+- Simulate user interactions with phishing emails and landing pages
+- Improve your incident response and detection skills
+- Analyze results and extract key insights from captured credentials and clicks
 
 ---
 
-## Skills Developed
+## Skills Gained
+
+### 🛠Technical Skills
+- Linux server setup and hardening
+- Docker containerization and networking
+- Cloud VM provisioning (Kamatera)
+- Mail server configuration with Poste.io
+- Firewall and network rule management
+
+### Cybersecurity Skills
+- Phishing campaign design
+- Security awareness simulation
+- Threat emulation and red team testing
+- Detection strategy validation
+
+
+---
+
 
 ### Technical Skills
 - **Virtualisation Management**: Proxmox VE setup and VM provisioning  
@@ -237,10 +259,10 @@ Download the Docker installation script:
 curl -fsSL https://get.docker.com -o get-docker.sh
 ```
 
-*Figure 19: Download Docker Script Command* <br>
+**Figure 19: Download Docker Script Command** <br>
 <img width="1111" height="159" alt="Screenshot 2025-07-11 114804" src="https://github.com/user-attachments/assets/3d7a8071-d191-4022-83aa-ffe3574ae79a" />
 
-*Figure 20: Script File in Directory* <br>
+**Figure 20: Script File in Directory** <br>
 <img width="1121" height="160" alt="Screenshot 2025-07-11 114856" src="https://github.com/user-attachments/assets/bcb2ef6d-5c59-4be3-8629-1d934f18e09e" />
 
 *Figure 21: Script File Content Preview* <br>
@@ -253,7 +275,7 @@ Run the script:
 sudo sh get-docker.sh
 ```
 
-*Figure 22: Run Installation Script* <br>
+**Figure 22: Run Installation Script** <br>
 <img width="1113" height="133" alt="Screenshot 2025-07-11 115056" src="https://github.com/user-attachments/assets/6d46e30c-5970-4119-8e99-f3e69b69210a" />
 
 
@@ -292,10 +314,10 @@ docker run \
     -t analogic/poste.io
 ```
 
-*Figure 23: Poste.io Container Running* <br>
+**Figure 23: Poste.io Container Running** <br>
 <img width="1107" height="253" alt="Screenshot 2025-07-11 115240" src="https://github.com/user-attachments/assets/ad39b5f1-55ef-4a62-abf3-8d338d5fda7b" />
 
-*Figure 24: Poste.io Ready Message* <br>
+**Figure 24: Poste.io Ready Message** <br>
 <img width="1094" height="482" alt="Screenshot 2025-07-11 125631" src="https://github.com/user-attachments/assets/593dbe5a-1e74-40b7-abf1-04912369279b" />
 
 For more advanced configuration, refer to the official guide:  
@@ -303,33 +325,33 @@ For more advanced configuration, refer to the official guide:
 
 Also, note that Poste.io opens the following ports:
 
-*Figure 25: Poste.io Ports* <br>
+**Figure 25: Poste.io Ports** <br>
 <img width="807" height="438" alt="Screenshot 2025-07-11 130300" src="https://github.com/user-attachments/assets/766e6db2-53de-4dd1-a3f6-d872f92e9e75" />
 
 #### 3. Test Poste.io
 
 On the top righ corner click on the mail icon.
-*Figure 26: Accesing Web Mail* <br>
+**Figure 26: Accesing Web Mail** <br>
 <img width="247" height="47" alt="Screenshot 2025-07-11 130353" src="https://github.com/user-attachments/assets/d355ce41-db71-4cad-b5d9-7c97c9d1808e" />
 
-Compose and email.
-*Figure 27: Web Mail Interface* <br>
+Compose and email.<br>
+**Figure 27: Web Mail Interface** <br>
 <img width="1474" height="651" alt="Screenshot 2025-07-11 130707" src="https://github.com/user-attachments/assets/19665fe0-1576-481b-9773-2c9e472f65cc" />
 
-Open on a browser tab MailTemp and get a disposable email address.
-*Figure 28: TempMail Website <br>
+Open on a browser tab MailTemp and get a disposable email address.,br>
+**Figure 28: TempMail Website** <br>
 <img width="1572" height="921" alt="Screenshot 2025-07-11 130809" src="https://github.com/user-attachments/assets/a8e4ec95-339d-4e33-9c4c-de6ed5327571" />
 
-Send an email to the disposable address.
-*Figure 29: Sending email <br>
+Send an email to the disposable address. <br>
+**Figure 29: Sending email** <br>
 <img width="1191" height="635" alt="Screenshot 2025-07-11 130754" src="https://github.com/user-attachments/assets/dba79eaf-45a2-40a0-b293-c1375d014f25" />
 
-Check the inbox of the disposable email.
-*Figure 30: Inbox <br>
+Check the inbox of the disposable email. <br>
+**Figure 30: Inbox** <br>
 <img width="1572" height="925" alt="Screenshot 2025-07-11 130822" src="https://github.com/user-attachments/assets/102223c1-d709-4fc7-a1f2-c0e363e75fde" />
 
-Now we can confirm that our mail server is working correctly and delivering emails with our fake domain (spoof).
-*Figure 31: Email with fake spoof domain <br>
+Now we can confirm that our mail server is working correctly and delivering emails with our fake domain (spoof). <br>
+**Figure 31: Email with fake spoof domain** <br>
 <img width="829" height="385" alt="Screenshot 2025-07-11 130926" src="https://github.com/user-attachments/assets/aa680ff7-5e71-4e25-955d-b8fe022578f7" />
 
 ---
@@ -354,8 +376,8 @@ Fill in the following configuration fields:
 - **Administrator email:** `admin@campaign.com.au`
 - **Password:** A strong password for mailserver access
 
-*Figure 32: Poste.io First-Time Setup Form* <br>
-<img width="1593" height="772" alt="Screenshot 2025-07-11 130037" src="https://github.com/user-attachments/assets/2d6ed2f8-a140-4be8-bfd9-2dfd1096c5f4" />
+**Figure 32: Poste.io First-Time Setup Form** <br>
+<img width="1593" height="774" alt="image" src="https://github.com/user-attachments/assets/5a2084c2-df66-42c0-9123-ed339325b6e0" />
 
 ---
 
@@ -368,7 +390,7 @@ Fill in the following configuration fields:
 #### 1. Download Gophish
 
 - Go to [https://getgophish.com](https://getgophish.com) and download version 0.12.1  
-  *Figure 33: Gophish Website*  
+  **Figure 33: Gophish Website** 
   <img width="1671" height="326" alt="Screenshot 2025-07-11 010507" src="https://github.com/user-attachments/assets/05fca0e6-9f10-492b-b2cb-9932f74e3c8c" />
 
 - Copy the download link:  
@@ -380,11 +402,11 @@ Fill in the following configuration fields:
   ```bash
   wget https://github.com/gophish/gophish/releases/download/v0.12.1/gophish-v0.12.1-linux-64bit.zip
   ```
-  *Figure 35: Gophish Download Command*  
+  **Figure 35: Gophish Download Command**
   <img width="1117" height="122" alt="Screenshot 2025-07-11 010948" src="https://github.com/user-attachments/assets/2f492aa2-1b3a-4553-ae1b-0a49d9a10f62" />  
-  *Figure 36: Gophish Downloaded*  
+  **Figure 36: Gophish Downloaded**  
   <img width="1107" height="560" alt="Screenshot 2025-07-11 011004" src="https://github.com/user-attachments/assets/1b997808-47ae-47cb-a8e9-efcf44458af3" />  
-  *Figure 37: Gophish File Check*  
+  **Figure 37: Gophish File Check**  
   <img width="1107" height="124" alt="Screenshot 2025-07-11 011035" src="https://github.com/user-attachments/assets/c4013ffe-21e3-4ac8-918e-2930257dcd7e" />
 
 #### 2. Create Gophish Folder and Unzip
@@ -393,16 +415,16 @@ Fill in the following configuration fields:
   ```bash
   sudo mkdir /opt/gophish
   ```
-  *Figure 38: Create Folder*  
+  **Figure 38: Create Folder**  
   <img width="1090" height="133" alt="Screenshot 2025-07-11 011114" src="https://github.com/user-attachments/assets/bcdcb5dc-280a-45ea-a34a-195e97e04985" />
 
 - Unzip the downloaded file:
   ```bash
   unzip gophish-v0.12.1-linux-64bit.zip -d /opt/gophish
   ```
-  *Figure 39: Unzip Command*  
+  **Figure 39: Unzip Command**  
   <img width="1108" height="83" alt="Screenshot 2025-07-11 011205" src="https://github.com/user-attachments/assets/8a8dc6c1-ab66-4f11-97b2-614e5db4a868" />  
-  *Figure 40: Folder Content*  
+  **Figure 40: Folder Content**  
   <img width="1113" height="141" alt="Screenshot 2025-07-11 011244" src="https://github.com/user-attachments/assets/73d3347d-2b7a-453f-a3a6-13f0e6ac8243" />
 
 #### 3. Change Permissions and Configure Gophish
@@ -412,7 +434,7 @@ Fill in the following configuration fields:
   cd /opt/gophish
   sudo chmod +x gophish
   ```
-  *Figure 41: Navigate to Folder*  
+  **Figure 41: Navigate to Folder**  
   <img width="1109" height="100" alt="Screenshot 2025-07-11 011335" src="https://github.com/user-attachments/assets/3029baac-b377-4d5e-959c-dfce65a1069e" />  
   *Figure 42: Modify Permissions*  
   <img width="1110" height="121" alt="Screenshot 2025-07-11 011415" src="https://github.com/user-attachments/assets/081e35a3-db64-44df-8a48-923435b7f602" />
@@ -421,14 +443,14 @@ Fill in the following configuration fields:
   ```bash
   sudo nano config.json
   ```
-  *Figure 43: Modify File*  
+  **Figure 43: Modify File**  
   <img width="1118" height="109" alt="Screenshot 2025-07-11 011449" src="https://github.com/user-attachments/assets/7ae41b98-28a0-4473-894e-9a7ea43eeee5" />
 
 - Change the line:
   `"listen_url": "127.0.0.0:3333"`  
   to  
   `"listen_url": "0.0.0.0:3333"`  
-  *Figure 44: Modified File*  
+  **Figure 44: Modified File**  
   <img width="1109" height="606" alt="Screenshot 2025-07-11 011546" src="https://github.com/user-attachments/assets/a1085982-3bbf-4862-a640-7ea053148fc2" />
 
 #### 4. Run Gophish Framework
@@ -438,16 +460,16 @@ Start the Gophish service:
 sudo ./gophish
 ```
 
-*Figure 45: Run Gophish*  
+**Figure 45: Run Gophish**  
 <img width="1122" height="126" alt="Screenshot 2025-07-11 011629" src="https://github.com/user-attachments/assets/a29c36bd-224b-4eef-babd-c6fc0ad34c7d" />  
-*Figure 46: Gophish Running*  
+**Figure 46: Gophish Running**  
 <img width="1115" height="776" alt="Screenshot 2025-07-11 011644" src="https://github.com/user-attachments/assets/62547ab2-c15d-4e84-827c-c37f0f37e0ef" />
 
 #### 5. Gophish Initial Credentials
 
 - The initial credentials are displayed in the terminal on the first run. You'll be prompted to set a new password.
 
-*Figure 47: Gophish Initial Credentials*  
+**Figure 47: Gophish Initial Credentials**  
 <img width="1115" height="776" alt="Screenshot 2025-07-11 011739" src="https://github.com/user-attachments/assets/6eeb3c77-c957-46ce-bddb-900152e0d70e" />
 
 ---
@@ -459,7 +481,7 @@ sudo ./gophish
 - Open a browser and visit:  
   `https://<SERVER_PUBLIC_IP>:3333`
 
-*Figure 48: Access Gophish Web Interface*  
+**Figure 48: Access Gophish Web Interface**  
 <img width="1512" height="711" alt="Screenshot 2025-07-11 012038" src="https://github.com/user-attachments/assets/cfcc9f3f-d29e-43cc-bf45-aacc9a9ae034" />
 
 #### 2. Change Default Credentials
@@ -467,11 +489,11 @@ sudo ./gophish
 - Log in using the temporary credentials shown earlier.
 - You will be prompted to change the default password.
 
-*Figure 49: Initial Credentials Login*  
+**Figure 49: Initial Credentials Login**  
 <img width="529" height="278" alt="Screenshot 2025-07-11 012148" src="https://github.com/user-attachments/assets/d7e53527-3526-4d2e-bb77-eb6a48b9acd4" />  
-*Figure 50: Change Default Password*  
+**Figure 50: Change Default Password**  
 <img width="634" height="460" alt="Screenshot 2025-07-11 012214" src="https://github.com/user-attachments/assets/12c205ff-8280-4657-8bb6-165515015637" />  
-*Figure 51: Gophish Dashboard*  
+**Figure 51: Gophish Dashboard**  
 <img width="1493" height="741" alt="Screenshot 2025-07-11 012241" src="https://github.com/user-attachments/assets/c6125d9b-a574-4441-a5cd-e69096eb345b" />
 
 -----------------------------------------------------------
@@ -485,7 +507,7 @@ sudo ./gophish
 
 For this project, we will deploy four lightweight Linux VM flavours, which will serve the purpose of simulating four clients, accessing disposable emails on the TempMail website. Will will be using Lubuntu, which is a lightweight Linux distribution. I have created a template on my Proxmox Home Lab and cloned it to get four separate VMs. I am not showing this process because I'm hoping you know. If you don't use Proxmpx, you can use any other Hypervisor, such as VirtualBox or VMware.
 
-*Figure 52: Lubuntu Client VMs*  
+**Figure 52: Lubuntu Client VMs**  
 <img width="1378" height="732" alt="image" src="https://github.com/user-attachments/assets/6d69e9a8-3c80-4690-80f7-8d48939e3ab3" />
 
 
@@ -494,54 +516,54 @@ Phase 7: Campaign Development and Testing
 
 Now, it is time to develop a campaign, and we need to source a good email template and an appropriate landing page for the test. For this project, I will use the Last.fm website. I have an email template from this website that will fit perfectly for this project. We will need to create a Virtual domain for the campaign on Poste.io.
 
-*Figure 53: Email Template* 
+**Figure 53: Email Template** <br>
 <img width="1314" height="1113" alt="image" src="https://github.com/user-attachments/assets/ac57e9c3-684a-434f-9c77-e36cb47c8655" />
 
 ### Step 7.1: Virtual Domain Creation on Poste.io
 
-On Poste.io admin site go to Virtual domains and click on Create a new virtual domain.
-*Figure 54: Virtual domains* 
+On the Poste.io admin site, go to Virtual domains and click on Create a new virtual domain. <br>
+**Figure 54: Virtual domains** <br>
 <img width="1666" height="536" alt="image" src="https://github.com/user-attachments/assets/685ebc33-e336-4330-bfcb-499d4eb6e8f6" />
 
-Create the domain using the domain address from the email template in my case `mailer.last.fm`, and submit it.
-*Figure 55: New Virtual domain* 
+Create the domain using the domain address from the email template, in my case `mailer.last.fm`, and submit it. <br>
+**Figure 55: New Virtual domain** 
 <img width="912" height="352" alt="image" src="https://github.com/user-attachments/assets/c59a303f-fa65-4065-87ae-60feeb72b5ca" />
 
-Now, let's create a a new email address for this doamil, use the email address from the template.
-*Figure 56: New email address* 
+Now, let's create a new email address for this domain, using the email address from the template. <br>
+**Figure 56: New email address** 
 <img width="1342" height="868" alt="image" src="https://github.com/user-attachments/assets/98085605-7243-4783-bed1-892df86c28c6" />
 
-Fill in the info for the new email account and submit.
-*Figure 57: New email filled out* 
+Fill in the info for the new email account and submit. <br>
+**Figure 57: New email filled out** 
 <img width="1146" height="689" alt="image" src="https://github.com/user-attachments/assets/bc0bd9b3-71ea-43f2-85b0-4f74c85346af" />
 
-*Figure 58: New email created* 
+**Figure 58: New email created** 
 <img width="1426" height="1033" alt="image" src="https://github.com/user-attachments/assets/ead884cd-f2da-492e-81ce-c9e92ea7e974" />
 
 ### Step 7.2: Test Email Delivery from new Virtual Domain
 
-First, log in to the Webmail.
+First, log in to the Webmail. <br>
 
-*Figure 59: Webmail portal* 
+**Figure 59: Webmail portal** <br>
 <img width="485" height="36" alt="image" src="https://github.com/user-attachments/assets/4907565e-0458-43a1-8647-7b68b7e5ab4d" />
 
-Use the new email created for the target domain campaign.
-*Figure 60: Webmail Credentials* 
+Use the new email created for the target domain campaign. <br>
+**Figure 60: Webmail Credentials** <br> 
 <img width="819" height="512" alt="image" src="https://github.com/user-attachments/assets/0a614025-98fb-4125-ad72-42c493f1cb89" />
 
 Compose an email and send to a disposable email address on TempEmail.
 
-*Figure 60: Temp email* 
-<img width="1310" height="297" alt="image" src="https://github.com/user-attachments/assets/81d0a20c-36af-4c41-947c-d667f6b21d8f" />
+**Figure 60: Temp email** <br>
+<img width="1310" height="297" alt="image" src="https://github.com/user-attachments/assets/81d0a20c-36af-4c41-947c-d667f6b21d8f" /><br>
 
-*Figure 61: Composed email* 
-<img width="1208" height="655" alt="image" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" />
+**Figure 61: Composed email** <br>
+<img width="1208" height="655" alt="image" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" /><br>
 
 Check if the email was received.
-*Figure 62: Inbox* 
-<img width="1299" height="530" alt="image" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" />
-*Figure 63: Email body* 
-<img width="746" height="472" alt="image" src="https://github.com/user-attachments/assets/19f38acb-fd77-440d-a898-4e12ee1d8a4f" />
+**Figure 62: Inbox** <br>
+<img width="1299" height="530" alt="image" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" /> <br>
+**Figure 63: Email body** <br>
+<img width="746" height="472" alt="image" src="https://github.com/user-attachments/assets/19f38acb-fd77-440d-a898-4e12ee1d8a4f" /> <br>
 
 Now, we are sure that our email server is delivering emails with the Virtual Domain created by it, and we are ready for the next step.
 
@@ -550,30 +572,30 @@ Now, we are sure that our email server is delivering emails with the Virtual Dom
 1. Email Template Creation
 
 Navigate to Email Templates and click on New Template
-*Figure 64: Email Templates*
+**Figure 64: Email Templates**
 <img width="1680" height="468" alt="image" src="https://github.com/user-attachments/assets/2b5e54c9-8ea9-45da-ad7e-1ab1f742432e" />
 
-Fill in the info and as I have a sample email for my template, I will use it, for click on Import Email.
-*Figure 65: Temapl Email info*
+Fill in the info, and as I have a sample email for my template, I will use it, and click on Import Email.
+**Figure 65: Template Email info**
 <img width="701" height="494" alt="image" src="https://github.com/user-attachments/assets/0bf2896a-51ba-4acc-bdef-46740b29e3f3" />
 
 I'm trying to access the email sample, but since I'm in Gmail, I need the source code. On Gmail, you can access it by clicking on the three dots on the right-hand side corner, then clicking on Show Original.
-*Figure 66: Template Email*
+**Figure 66: Template Email**
 <img width="1301" height="909" alt="image" src="https://github.com/user-attachments/assets/99308790-692b-403d-b946-2cbddd055831" />
 
 Click on  Copy to Clipboard
-*Figure 67: Copy original Email*
+**Figure 67: Copy original Email**
 <img width="1586" height="589" alt="image" src="https://github.com/user-attachments/assets/a7e4ba57-f421-44f4-ae6f-a5df8f159a40" />
 
 Now paste the Original mail into the Import Email window on Gophish, and check Change Links to Point to Landing Page and then click on import.
-*Figure 68: Import Email*
+**Figure 68: Import Email**
 <img width="711" height="499" alt="image" src="https://github.com/user-attachments/assets/59ae8291-1a15-4186-a754-7afd6fbdb28e" />
 
 Now that you have all fill in you cna save the template
-*Figure 69: Saving Email Template*
+**Figure 69: Saving Email Template**
 <img width="694" height="1248" alt="image" src="https://github.com/user-attachments/assets/586096fc-7198-4f1b-b548-59c5b6bccb5a" />
 
-*Figure 69: Saved Email Template*
+**Figure 69: Saved Email Template**
 <img width="1413" height="396" alt="image" src="https://github.com/user-attachments/assets/e11e168b-098b-48a8-b079-ccb13155c7eb" />
 
 2. User Group Configuration
@@ -739,30 +761,3 @@ This project successfully demonstrates the end-to-end process of setting up and 
 ### Landing Page Doesn’t Render Correctly
 - Ensure imported source HTML is clean and all required assets (CSS, JS) are reachable.
 - Use “Import Site” only for basic HTML — modern JavaScript-heavy sites may fail to import.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
