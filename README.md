@@ -10,13 +10,13 @@ This comprehensive lab guide demonstrates how to simulate a **real-world phishin
 - Explore phishing infrastructure capabilities (Gophish + Mail server)
 - Simulate user interactions with phishing emails and landing pages
 - Improve incident response and detection skills
-- Analyze campaign results and extract key insights from captured credentials and user interactions
+- Analyse campaign results and extract key insights from captured credentials and user interactions
 
 ## Skills Gained
 
 ### Technical Skills
 - **Linux System Administration**: Ubuntu server setup and hardening
-- **Virtualization Management**: Proxmox VE setup and VM provisioning
+- **Virtualisation Management**: Proxmox VE setup and VM provisioning
 - **Cloud Infrastructure**: Configuration and deployment using Kamatera
 - **Containerization**: Docker setup and container management
 - **Email Server Administration**: Installing and configuring Poste.io with SMTP
@@ -430,7 +430,7 @@ sudo ./gophish
 
 Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lubuntu for its minimal resource requirements.
 
-**Note**: The VM deployment process using Proxmox, VirtualBox, or VMware is not detailed here as it's assumed you have virtualization experience.
+**Note**: The VM deployment process using Proxmox, VirtualBox, or VMware is not detailed here as it's assumed you have virtualisation experience.
 
 **Figure 52: Lubuntu Client VMs**  
 <img width="1378" height="732" alt="Client VMs" src="https://github.com/user-attachments/assets/6d69e9a8-3c80-4690-80f7-8d48939e3ab3" />
@@ -441,13 +441,13 @@ Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lu
 
 #### 7.1.1 Create Target Domain
 
-1. In Poste.io admin interface, navigate to **Virtual Domains**
+1. In the Poste.io admin interface, navigate to **Virtual Domains**
 2. Click **Create a new virtual domain**
 
 **Figure 54: Virtual Domains**  
 <img width="1666" height="536" alt="Virtual Domains" src="https://github.com/user-attachments/assets/685ebc33-e336-4330-bfcb-499d4eb6e8f6" />
 
-3. Create domain using: `mailer.last.fm` (matching your email template)
+3. Create a domain using: `mailer.last.fm` (matching your email template)
 
 **Figure 55: New Virtual Domain**  
 <img width="912" height="352" alt="New Domain" src="https://github.com/user-attachments/assets/c59a303f-fa65-4065-87ae-60feeb72b5ca" />
@@ -469,7 +469,7 @@ Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lu
 
 #### 7.1.3 Test Virtual Domain
 
-1. Access webmail portal
+1. Access the webmail portal
 
 **Figure 59: Webmail Portal**  
 <img width="485" height="36" alt="Webmail Portal" src="https://github.com/user-attachments/assets/4907565e-0458-43a1-8647-7b68b7e5ab4d" />
@@ -479,12 +479,12 @@ Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lu
 **Figure 60: Webmail Login**  
 <img width="819" height="512" alt="Webmail Credentials" src="https://github.com/user-attachments/assets/0a614025-98fb-4125-ad72-42c493f1cb89" />
 
-3. Send test email to verify functionality
+3. Send a test email to verify functionality
 
 **Figure 61: Test Email**  
 <img width="1208" height="655" alt="Test Email" src="https://github.com/user-attachments/assets/bb260bef-f1c1-43b7-aea7-2b4b400422fc" />
 
-4. Confirm delivery to disposable email
+4. Confirm delivery to a disposable email
 
 **Figure 62: Email Delivery**  
 <img width="1299" height="530" alt="Email Delivery" src="https://github.com/user-attachments/assets/1316955d-09c9-47f4-8b24-a5c4ac500e6a" />
@@ -501,7 +501,7 @@ Deploy four lightweight Linux VMs to simulate client targets. This guide uses Lu
 **Figure 64: Email Templates**  
 <img width="1680" height="468" alt="Email Templates" src="https://github.com/user-attachments/assets/2b5e54c9-8ea9-45da-ad7e-1ab1f742432e" />
 
-2. Configure template details and import original email
+2. Configure template details and import the original email
 
 **Figure 65: Template Configuration**  
 <img width="701" height="494" alt="Template Config" src="https://github.com/user-attachments/assets/0bf2896a-51ba-4acc-bdef-46740b29e3f3" />
